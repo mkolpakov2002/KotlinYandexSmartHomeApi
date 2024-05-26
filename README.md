@@ -102,13 +102,15 @@ if (manageGroupResult is YandexApiResponse.SuccessManageGroupCapabilitiesState) 
 ./gradlew test
 ```
 
+Для тестов может использоваться умный дом с одной или несколькими лампами. См. `YandexSmartHomeClientOnlineTest`.
+
+## Текущие ошибки
+
+Возникают ошибки при тестировании группового управления лампами.
+
 ## Вклад
 
 Если вы хотите внести свой вклад в проект, пожалуйста, создайте pull request или откройте issue.
-
-## Лицензия
-
-Этот проект лицензирован под MIT License - подробнее в файле [LICENSE](LICENSE).
 
 ---
 
