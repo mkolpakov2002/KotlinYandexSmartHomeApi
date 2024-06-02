@@ -3,6 +3,7 @@ package ru.hse.miem.yandexsmarthomeapi.entity.common
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonArray
@@ -17,6 +18,8 @@ import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexManageGroupCapabilitiesSt
 import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexUserInfoResponse
 import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.DeviceCapabilityObject
 import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.GroupCapabilityObject
+import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.SceneObject
+import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.SceneObjectWrapper
 
 fun DeviceCapabilityObject.toYandexCapabilityActionJsonObject(): JsonObject {
     val capabilityType = type.type.code()
@@ -48,8 +51,7 @@ fun GroupCapabilityObject.toYandexCapabilityActionJsonObject(): JsonObject {
     }
 }
 
-@OptIn(ExperimentalSerializationApi::class)
-fun YandexUserInfoResponse.toUniversalSchemeJson(): String {
+fun YandexUserInfoResponse.toJson(): String {
     val responseJson = buildJsonObject {
         put("status", status)
         put("request_id", requestId)

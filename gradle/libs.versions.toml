@@ -1,5 +1,8 @@
 [versions]
 agp = "8.4.1"
+andcolorpicker = "0.6.2"
+androidcolorx = "0.2.0"
+draggableview = "1.0.1"
 enums = "1.8.22.2"
 junitJupiterApi = "5.10.2"
 kotlin = "2.0.0-RC1"
@@ -8,19 +11,36 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
+kotlinLogging = "6.0.9"
 kotlinxCoroutinesAndroid = "1.8.0"
+kotlinxCoroutinesAndroidVersion = "1.8.1-Beta"
 kotlinxCoroutinesTest = "1.8.1-Beta"
 kotlinxSerializationJson = "1.7.0-RC"
 kotlinxSerializationJsonVersion = "1.7.0-RC"
 ktorClientCore = "3.0.0-beta-1"
-material = "1.10.0"
+material = "1.12.0"
+media3Exoplayer = "1.3.1"
 mockk = "1.13.10"
 multidex = "2.0.1"
+navigationFragmentKtx = "2.7.7"
 slf4jSimple = "2.0.9"
+snackify = "0.1.2"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
+andcolorpicker = { module = "codes.side:andcolorpicker", version.ref = "andcolorpicker" }
+androidcolorx = { module = "me.jorgecastillo:androidcolorx", version.ref = "androidcolorx" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3Exoplayer" }
+androidx-media3-exoplayer-dash = { module = "androidx.media3:media3-exoplayer-dash", version.ref = "media3Exoplayer" }
+androidx-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3Exoplayer" }
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
+androidx-navigation-dynamic-features-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigationFragmentKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+draggableview = { module = "com.github.hyuwah:DraggableView", version.ref = "draggableview" }
 enums = { module = "dev.bright.codified:enums", version.ref = "enums" }
 enums-serializer = { module = "dev.bright.codified:enums-serializer", version.ref = "enums" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -29,7 +49,10 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junitJupiterApi" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitJupiterApi" }
+kotlin-logging = { module = "io.github.oshai:kotlin-logging", version.ref = "kotlinLogging" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-coroutines-android-v181beta = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroidVersion" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesAndroidVersion" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-serialization-json-v170rc = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
@@ -49,6 +72,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4jSimple" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
+snackify = { module = "com.github.Musfick:Snackify", version.ref = "snackify" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

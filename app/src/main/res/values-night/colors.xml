@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#FF9800</color> <!-- Оранжевый -->
+    <color name="primary_variant">#F57C00</color> <!-- Более темный оранжевый -->
+    <color name="on_primary">#000000</color> <!-- Черный -->
+
+    <color name="secondary">#03A9F4</color> <!-- Синий -->
+    <color name="secondary_variant">#0288D1</color> <!-- Более темный синий -->
+    <color name="on_secondary">#000000</color> <!-- Черный -->
+
+    <color name="background">#121212</color> <!-- Темный фон -->
+    <color name="on_background">#FFFFFF</color> <!-- Белый -->
+
+    <color name="surface">#121212</color> <!-- Темный фон -->
+    <color name="on_surface">#FFFFFF</color> <!-- Белый -->
+
+    <color name="error">#CF6679</color> <!-- Красный -->
+    <color name="on_error">#000000</color> <!-- Черный -->
+</resources>

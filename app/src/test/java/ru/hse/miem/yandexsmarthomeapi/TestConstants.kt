@@ -2,7 +2,7 @@ package ru.hse.miem.yandexsmarthomeapi
 
 object TestConstants {
 
-    val bearerToken = "YOUR_BEARER_TOKEN"
+    const val BEARER_TOKEN = "y0_AgAEA7qkFjULAAunigAAAAECgh4nAACLJd5CGYRHgKrglKkdzWDwL123WQ"
 
     val responseDeviceStateJson = """
     {

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Умный дом яндекса</string>
+    <!-- Категории устройств -->
+    <string name="category_sensors">Датчики</string>
+    <string name="category_smart_meters">Счетчики</string>
+    <string name="category_media_devices">Медиаустройства</string>
+    <string name="category_kitchen_appliances">Кухонная техника</string>
+    <string name="category_home_appliances">Бытовая техника</string>
+    <string name="category_pet_devices">Устройства для животных</string>
+    <string name="category_climate_devices">Климатическая техника</string>
+    <string name="category_electrical_equipment">Электрооборудование</string>
+    <string name="category_openable_systems">Автоматические системы управления открытием/закрытием</string>
+    <string name="category_other_devices">Остальные устройства</string>
+
+    <!-- Датчики -->
+    <string name="devices_types_sensor">devices.types.sensor</string>
+    <string name="sensor">Датчик</string>
+    <string name="sensor_description">Датчик движения, датчик влажности и другие датчики. Устройство, которое передает данные со свойств.</string>
+
+    <string name="devices_types_sensor_button">devices.types.sensor.button</string>
+    <string name="sensor_button">Умная кнопка</string>
+    <string name="sensor_button_description">Устройство, которое сообщает о нажатии на кнопку.</string>
+
+    <string name="devices_types_sensor_climate">devices.types.sensor.climate</string>
+    <string name="sensor_climate">Датчик климата</string>
+    <string name="sensor_climate_description">Устройство, которое сообщает о температуре и влажности в помещении.</string>
+
+    <string name="devices_types_sensor_gas">devices.types.sensor.gas</string>
+    <string name="sensor_gas">Датчик газа</string>
+    <string name="sensor_gas_description">Устройство, которое сообщает о наличии газа в помещении.</string>
+
+    <string name="devices_types_sensor_illumination">devices.types.sensor.illumination</string>
+    <string name="sensor_illumination">Датчик освещенности</string>
+    <string name="sensor_illumination_description">Устройство, которое сообщает об уровне освещенности.</string>
+
+    <string name="devices_types_sensor_motion">devices.types.sensor.motion</string>
+    <string name="sensor_motion">Датчик движения</string>
+    <string name="sensor_motion_description">Устройство, которое сообщает о наличии движения.</string>
+
+    <string name="devices_types_sensor_open">devices.types.sensor.open</string>
+    <string name="sensor_open">Датчик открытия двери</string>
+    <string name="sensor_open_description">Устройство, которое сообщает об открытии/закрытии двери.</string>
+
+    <string name="devices_types_sensor_smoke">devices.types.sensor.smoke</string>
+    <string name="sensor_smoke">Датчик дыма</string>
+    <string name="sensor_smoke_description">Устройство, которое сообщает о наличии дыма в помещении.</string>
+
+    <string name="devices_types_sensor_vibration">devices.types.sensor.vibration</string>
+    <string name="sensor_vibration">Датчик вибрации</string>
+    <string name="sensor_vibration_description">Устройство, которое сообщает о физическом воздействии: вибрация, падение, переворачивание.</string>
+
+    <string name="devices_types_sensor_water_leak">devices.types.sensor.water_leak</string>
+    <string name="sensor_water_leak">Датчик протечки воды</string>
+    <string name="sensor_water_leak_description">Устройство, которое сообщает о протечке воды.</string>
+
+    <!-- Счетчики -->
+    <string name="devices_types_smart_meter">devices.types.smart_meter</string>
+    <string name="smart_meter">Счетчик</string>
+    <string name="smart_meter_description">Устройство, которое измеряет расход чего-либо (универсальный тип для счетчиков).</string>
+
+    <string name="devices_types_smart_meter_cold_water">devices.types.smart_meter.cold_water</string>
+    <string name="smart_meter_cold_water">Счетчик холодной воды</string>
+    <string name="smart_meter_cold_water_description">Устройство, которое измеряет расход холодной воды.</string>
+
+    <string name="devices_types_smart_meter_electricity">devices.types.smart_meter.electricity</string>
+    <string name="smart_meter_electricity">Счетчик электроэнергии</string>
+    <string name="smart_meter_electricity_description">Устройство, которое измеряет расход электроэнергии.</string>
+
+    <string name="devices_types_smart_meter_gas">devices.types.smart_meter.gas</string>
+    <string name="smart_meter_gas">Счетчик газа</string>
+    <string name="smart_meter_gas_description">Устройство, которое измеряет расход газа.</string>
+
+    <string name="devices_types_smart_meter_heat">devices.types.smart_meter.heat</string>
+    <string name="smart_meter_heat">Счетчик тепла</string>
+    <string name="smart_meter_heat_description">Устройство, которое измеряет расход тепла.</string>
+
+    <string name="devices_types_smart_meter_hot_water">devices.types.smart_meter.hot_water</string>
+    <string name="smart_meter_hot_water">Счетчик горячей воды</string>
+    <string name="smart_meter_hot_water_description">Устройство, которое измеряет расход горячей воды.</string>
+
+    <!-- Медиаустройства -->
+    <string name="devices_types_camera">devices.types.camera</string>
+    <string name="camera">Видеокамера</string>
+    <string name="camera_description">Видеокамера, видео-домофон, дверной глазок с камерой. Устройства со встроенной камерой и функцией трансляции видео.</string>
+
+    <string name="devices_types_media_device">devices.types.media_device</string>
+    <string name="media_device">Медиаустройство</string>
+    <string name="media_device_description">DVD-плеер и другие медиаустройства. Устройства, которые умеют воспроизводить звук и видео.</string>
+
+    <string name="devices_types_media_device_receiver">devices.types.media_device.receiver</string>
+    <string name="media_device_receiver">Спутниковый ресивер</string>
+    <string name="media_device_receiver_description">Устройство, подключаемое к телевизору или дисплею, для просмотра видеоконтента.</string>
+
+    <string name="devices_types_media_device_tv">devices.types.media_device.tv</string>
+    <string name="media_device_tv">Умный телевизор</string>
+    <string name="media_device_tv_description">Умный телевизор, ИК-пульт от телевизора, медиаприставка, ресивер. Устройство для просмотра видеоконтента.</string>
+
+    <string name="devices_types_media_device_tv_box">devices.types.media_device.tv_box</string>
+    <string name="media_device_tv_box">Умная ТВ-приставка</string>
+    <string name="media_device_tv_box_description">Устройство, подключаемое к телевизору или дисплею, для просмотра видеоконтента.</string>
+
+    <!-- Кухонная техника -->
+    <string name="devices_types_cooking">devices.types.cooking</string>
+    <string name="cooking">Кухонная техника</string>
+    <string name="cooking_description">Холодильник, духовой шкаф. Различная умная кухонная техника.</string>
+
+    <string name="devices_types_cooking_coffee_maker">devices.types.cooking.coffee_maker</string>
+    <string name="cooking_coffee_maker">Кофеварка</string>
+    <string name="cooking_coffee_maker_description">Устройство, которое умеет делать кофе.</string>
+
+    <string name="devices_types_cooking_kettle">devices.types.cooking.kettle</string>
+    <string name="cooking_kettle">Умный чайник</string>
+    <string name="cooking_kettle_description">Устройство, которое умеет кипятить воду и/или делать чай.</string>
+
+    <string name="devices_types_cooking_multicooker">devices.types.cooking.multicooker</string>
+    <string name="cooking_multicooker">Мультиварка</string>
+    <string name="cooking_multicooker_description">Устройство, которое выполняет функции мультиварки.</string>
+
+    <string name="devices_types_dishwasher">devices.types.dishwasher</string>
+    <string name="dishwasher">Посудомоечная машина</string>
+    <string name="dishwasher_description">Устройство для мытья посуды.</string>
+
+    <!-- Бытовая техника -->
+    <string name="devices_types_iron">devices.types.iron</string>
+    <string name="iron">Утюг</string>
+    <string name="iron_description">Устройство, которое выполняет функции утюга.</string>
+
+    <string name="devices_types_vacuum_cleaner">devices.types.vacuum_cleaner</string>
+    <string name="vacuum_cleaner">Робот-пылесос</string>
+    <string name="vacuum_cleaner_description">Устройство, которое выполняет функцию пылесоса.</string>
+
+    <string name="devices_types_washing_machine">devices.types.washing_machine</string>
+    <string name="washing_machine">Стиральная машина</string>
+    <string name="washing_machine_description">Устройство для стирки белья.</string>
+
+    <!-- Устройства для животных -->
+    <string name="devices_types_pet_drinking_fountain">devices.types.pet_drinking_fountain</string>
+    <string name="pet_drinking_fountain">Поилка</string>
+    <string name="pet_drinking_fountain_description">Устройство, которое наполняет водой миску домашнего животного.</string>
+
+    <string name="devices_types_pet_feeder">devices.types.pet_feeder</string>
+    <string name="pet_feeder">Кормушка</string>
+    <string name="pet_feeder_description">Устройство для кормления домашних животных.</string>
+
+    <!-- Климатическая техника -->
+    <string name="devices_types_humidifier">devices.types.humidifier</string>
+    <string name="humidifier">Увлажнитель воздуха</string>
+    <string name="humidifier_description">Устройство, которое регулирует влажность в помещении.</string>
+
+    <string name="devices_types_purifier">devices.types.purifier</string>
+    <string name="purifier">Очиститель воздуха</string>
+    <string name="purifier_description">Устройство с функцией очистки воздуха.</string>
+
+    <string name="devices_types_thermostat">devices.types.thermostat</string>
+    <string name="thermostat">Термостат</string>
+    <string name="thermostat_description">Водонагреватель, теплый пол, обогреватель, электровентилятор. Устройства с возможностью регулирования температуры.</string>
+
+    <string name="devices_types_thermostat_ac">devices.types.thermostat.ac</string>
+    <string name="thermostat_ac">Кондиционер</string>
+    <string name="thermostat_ac_description">Устройство для управления микроклиматом в помещении.</string>
+
+    <!-- Электрооборудование -->
+    <string name="devices_types_light">devices.types.light</string>
+    <string name="light">Свет</string>
+    <string name="light_description">Лампочка, светильник, ночник. Устройство с управляемыми светящимися элементами.</string>
+
+    <string name="devices_types_light_ceiling">devices.types.light.ceiling</string>
+    <string name="light_ceiling">Люстра</string>
+    <string name="light_ceiling_description">Устройство, которое выполняет функцию люстры.</string>
+
+    <string name="devices_types_light_strip">devices.types.light.strip</string>
+    <string name="light_strip">Диодная лента</string>
+    <string name="light_strip_description">Устройство с управляемой диодной лентой.</string>
+
+    <string name="devices_types_socket">devices.types.socket</string>
+    <string name="socket">Розетка</string>
+    <string name="socket_description">Умная розетка.</string>
+
+    <string name="devices_types_switch">devices.types.switch</string>
+    <string name="ya_switch">Выключатель</string>
+    <string name="switch_description">Настенный выключатель света, тумблер, автомат в электрическом щитке, умное реле, умная кнопка.</string>
+
+    <!-- Автоматические системы управления открытием/закрытием -->
+    <string name="devices_types_openable">devices.types.openable</string>
+    <string name="openable">Автоматические системы управления открытием/закрытием</string>
+    <string name="openable_description">Дверь, ворота, окно, ставни. Устройство, которое умеет открываться и/или закрываться.</string>
+
+    <string name="devices_types_openable_curtain">devices.types.openable.curtain</string>
+    <string name="openable_curtain">Шторы</string>
+    <string name="openable_curtain_description">Устройство, которое выполняет функцию штор.</string>
+
+    <!-- Остальные устройства -->
+    <string name="devices_types_other">devices.types.other</string>
+    <string name="other">Остальные устройства</string>
+
+    <!-- Capability names -->
+    <string name="capability_on_off">Удаленное включение и выключение устройства</string>
+    <string name="capability_color_setting">Управление цветом для светящихся элементов в устройстве</string>
+    <string name="capability_range">Управление параметрами устройства, которые имеют диапазон</string>
+    <string name="capability_mode">Переключение режимов работы устройства</string>
+    <string name="capability_toggle">Управление параметрами устройства, которые могут находиться только в одном из двух состояний</string>
+    <string name="capability_video_stream">Настройка видеопотока устройства</string>
+    <string name="capability_unknown">Неизвестное умение</string>
+    <string name="capability_on_off_title">Состояние</string>
+    <string name="capability_color_setting_title">Настройка цвета</string>
+    <string name="capability_range_title">Диапазон</string>
+    <string name="capability_mode_title">Режим</string>
+    <string name="capability_toggle_title">Переключатель</string>
+    <string name="capability_video_stream_title">Видеопоток</string>
+    <string name="capability_unknown_title">Неизвестное умение</string>
+
+    <string name="capability_color_setting_hue">Цветовой тон</string>
+    <string name="capability_color_setting_saturation">Насыщенность</string>
+    <string name="capability_color_setting_value">	Значение цвета</string>
+    <string name="capability_color_setting_temperature_k">Температура (K)</string>
+
+    <!-- Brightness -->
+    <string name="capability_brightness_title">Яркость</string>
+    <string name="capability_brightness_description">Изменение яркости световых элементов.</string>
+
+    <!-- Channel -->
+    <string name="capability_channel_title">Канал</string>
+    <string name="capability_channel_description">Изменение канала, например телевизионного.</string>
+
+    <!-- Humidity -->
+    <string name="capability_humidity_title">Влажность</string>
+    <string name="capability_humidity_description">Изменение влажности.</string>
+
+    <!-- Open -->
+    <string name="capability_open_title">Открыть</string>
+    <string name="capability_open_description">Открывание чего-либо (например, штор, окна).</string>
+
+    <!-- Temperature -->
+    <string name="capability_temperature_title">Температура</string>
+    <string name="capability_temperature_description">Изменение температуры, например, температуры нагрева чайника, обогревателя или температуры кондиционера.</string>
+
+    <!-- Volume -->
+    <string name="capability_volume_title">Громкость</string>
+    <string name="capability_volume_description">Изменение громкости устройства.</string>
+
+    <!-- Property names -->
+    <string name="property_float">Отображение значений свойств устройства в числовом формате</string>
+    <string name="property_event">Отображение показаний свойств устройства</string>
+    <string name="property_unknown">Неизвестное свойство</string>
+    <string name="property_float_title">Числовой формат</string>
+    <string name="property_event_title">Событие</string>
+    <string name="property_unknown_title">Неизвестное свойство</string>
+
+    <!-- Mode: Cleanup -->
+    <string name="capability_cleanup_mode_title">Режим уборки</string>
+    <string name="capability_cleanup_mode_description">Установка режима уборки.</string>
+
+    <!-- Mode: Coffee -->
+    <string name="capability_coffee_mode_title">Режим работы кофеварки</string>
+    <string name="capability_coffee_mode_description">Установка режима работы кофеварки.</string>
+
+    <!-- Mode: Dishwashing -->
+    <string name="capability_dishwashing_title">Режим мытья посуды</string>
+    <string name="capability_dishwashing_description">Установка режима мытья посуды.</string>
+
+    <!-- Mode: Fan Speed -->
+    <string name="capability_fan_speed_title">Скорость вентиляции</string>
+    <string name="capability_fan_speed_description">Установка режима работы скорости вентиляции, например, в кондиционере, вентиляторе или обогревателе.</string>
+
+    <!-- Mode: Heat -->
+    <string name="capability_heat_title">Режим нагрева</string>
+    <string name="capability_heat_description">Установка режима нагрева.</string>
+
+    <!-- Mode: Input Source -->
+    <string name="capability_input_source_title">Источник сигнала</string>
+    <string name="capability_input_source_description">Установка источника сигнала.</string>
+
+    <!-- Mode: Program -->
+    <string name="capability_program_title">Программа</string>
+    <string name="capability_program_description">Установка какой-либо программы работы.</string>
+
+    <!-- Mode: Swing -->
+    <string name="capability_swing_title">Направление воздуха</string>
+    <string name="capability_swing_description">Установка направления воздуха в климатической технике.</string>
+
+    <!-- Mode: Tea -->
+    <string name="capability_tea_mode_title">Режим приготовления чая</string>
+    <string name="capability_tea_mode_description">Установка режима приготовления чая.</string>
+
+    <!-- Mode: Thermostat -->
+    <string name="capability_thermostat_title">Температурный режим</string>
+    <string name="capability_thermostat_description">Установка температурного режима работы климатической техники, например, в кондиционере.</string>
+
+    <!-- Mode: Work Speed -->
+    <string name="capability_work_speed_title">Скорость работы</string>
+    <string name="capability_work_speed_description">Установка скорости работы.</string>
+
+    <!-- Toggle: Backlight -->
+    <string name="capability_backlight_title">Подсветка</string>
+    <string name="capability_backlight_description">Функция отвечает за включение подсветки.</string>
+
+    <!-- Toggle: Controls Locked -->
+    <string name="capability_controls_locked_title">Блокировка управления</string>
+    <string name="capability_controls_locked_description">Функция отвечает за блокировку управления и включение детского режима.</string>
+
+    <!-- Toggle: Ionization -->
+    <string name="capability_ionization_title">Ионизация</string>
+    <string name="capability_ionization_description">Функция отвечает за включение ионизации.</string>
+
+    <!-- Toggle: Keep Warm -->
+    <string name="capability_keep_warm_title">Поддержание тепла</string>
+    <string name="capability_keep_warm_description">Функция отвечает за включение поддержания тепла.</string>
+
+    <!-- Toggle: Mute -->
+    <string name="capability_mute_title">Отключение звука</string>
+    <string name="capability_mute_description">Функция отвечает за выключение звука на устройстве.</string>
+
+    <!-- Toggle: Oscillation -->
+    <string name="capability_oscillation_title">Вращение</string>
+    <string name="capability_oscillation_description">Функция отвечает за включение вращения. Например, включение вращения вентилятора.</string>
+
+    <!-- Toggle: Pause -->
+    <string name="capability_pause_title">Пауза</string>
+    <string name="capability_pause_description">Функция отвечает за временную остановку (паузу) текущей деятельности устройства.</string>
+
+    <!-- Modes -->
+    <string name="mode_auto_title">Автоматический режим</string>
+    <string name="mode_eco_title">Экономичный режим</string>
+    <string name="mode_smart_title">Умный режим</string>
+    <string name="mode_turbo_title">Турбо режим</string>
+    <string name="mode_cool_title">Режим охлаждения</string>
+    <string name="mode_dry_title">Режим осушения</string>
+    <string name="mode_fan_only_title">Режим вентиляции</string>
+    <string name="mode_heat_title">Режим обогрева</string>
+    <string name="mode_preheat_title">Режим подогрева</string>
+    <string name="mode_high_title">Высокая скорость</string>
+    <string name="mode_low_title">Низкая скорость</string>
+    <string name="mode_medium_title">Средняя скорость</string>
+    <string name="mode_max_title">Максимальный режим</string>
+    <string name="mode_min_title">Минимальный режим</string>
+    <string name="mode_fast_title">Быстрый режим</string>
+    <string name="mode_slow_title">Медленный режим</string>
+    <string name="mode_express_title">Экспресс режим</string>
+    <string name="mode_normal_title">Нормальный режим</string>
+    <string name="mode_quiet_title">Тихий режим</string>
+    <string name="mode_horizontal_title">Горизонтальный режим</string>
+    <string name="mode_stationary_title">Статичный режим</string>
+    <string name="mode_vertical_title">Вертикальный режим</string>
+    <string name="mode_one_title">Первый режим</string>
+    <string name="mode_two_title">Второй режим</string>
+    <string name="mode_three_title">Третий режим</string>
+    <string name="mode_four_title">Четвертый режим</string>
+    <string name="mode_five_title">Пятый режим</string>
+    <string name="mode_six_title">Шестой режим</string>
+    <string name="mode_seven_title">Седьмой режим</string>
+    <string name="mode_eight_title">Восьмой режим</string>
+    <string name="mode_nine_title">Девятый режим</string>
+    <string name="mode_ten_title">Десятый режим</string>
+    <string name="mode_americano_title">Американо</string>
+    <string name="mode_cappuccino_title">Капучино</string>
+    <string name="mode_double_title">Двойной</string>
+    <string name="mode_espresso_title">Эспрессо</string>
+    <string name="mode_double_espresso_title">Двойной эспрессо</string>
+    <string name="mode_latte_title">Латте</string>
+    <string name="mode_black_tea_title">Черный чай</string>
+    <string name="mode_flower_tea_title">Цветочный чай</string>
+    <string name="mode_green_tea_title">Зеленый чай</string>
+    <string name="mode_herbal_tea_title">Травяной чай</string>
+    <string name="mode_oolong_tea_title">Чай улун</string>
+    <string name="mode_puerh_tea_title">Чай пуэр</string>
+    <string name="mode_red_tea_title">Красный чай</string>
+    <string name="mode_white_tea_title">Белый чай</string>
+    <string name="mode_glass_title">Мойка стекла</string>
+    <string name="mode_intensive_title">Интенсивный режим</string>
+    <string name="mode_pre_rinse_title">Режим ополаскивания</string>
+    <string name="mode_aspic_title">Режим холодца</string>
+    <string name="mode_baby_food_title">Режим детского питания</string>
+    <string name="mode_baking_title">Режим выпечки</string>
+    <string name="mode_bread_title">Режим хлеба</string>
+    <string name="mode_boiling_title">Режим варки</string>
+    <string name="mode_cereals_title">Режим круп</string>
+    <string name="mode_cheesecake_title">Режим чизкейка</string>
+    <string name="mode_deep_fryer_title">Режим фритюра</string>
+    <string name="mode_dessert_title">Режим десертов</string>
+    <string name="mode_fowl_title">Режим дичи</string>
+    <string name="mode_frying_title">Режим жарки</string>
+    <string name="mode_macaroni_title">Режим макарон</string>
+    <string name="mode_milk_porridge_title">Режим молочной каши</string>
+    <string name="mode_multicooker_title">Режим мультиварки</string>
+    <string name="mode_pasta_title">Режим пасты</string>
+    <string name="mode_pilaf_title">Режим плова</string>
+    <string name="mode_pizza_title">Режим пиццы</string>
+    <string name="mode_sauce_title">Режим соуса</string>
+    <string name="mode_slow_cook_title">Режим томления</string>
+    <string name="mode_soup_title">Режим супа</string>
+    <string name="mode_steam_title">Режим пара</string>
+    <string name="mode_stewing_title">Режим тушения</string>
+    <string name="mode_vacuum_title">Режим вакуума</string>
+    <string name="mode_yogurt_title">Режим йогурта</string>
+
+    <string name="capability_on">Включено</string>
+    <string name="capability_off">Выключено</string>
+
+</resources>

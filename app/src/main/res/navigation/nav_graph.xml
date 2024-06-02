@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/tokenEntryFragment">
+
+    <fragment
+        android:id="@+id/tokenEntryFragment"
+        android:name="ru.hse.miem.yandexsmarthomeapi.ui.token_entry.TokenEntryFragment"
+        android:label="Token Entry">
+        <action
+            android:id="@+id/action_tokenEntryFragment_to_deviceListFragment"
+            app:destination="@id/deviceListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/deviceListFragment"
+        android:name="ru.hse.miem.yandexsmarthomeapi.ui.device_list.DeviceListFragment"
+        android:label="Device List">
+        <action
+            android:id="@+id/action_deviceListFragment_to_deviceControlFragment"
+            app:destination="@id/deviceControlFragment">
+            <argument
+                android:name="deviceId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/deviceControlFragment"
+        android:name="ru.hse.miem.yandexsmarthomeapi.ui.device_control.DeviceControlFragment"
+        android:label="Device Control"
+        tools:layout="@layout/fragment_device_control">
+        <argument
+            android:name="deviceId"
+            app:argType="string"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>

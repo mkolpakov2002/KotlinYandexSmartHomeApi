@@ -1,5 +1,6 @@
 package ru.hse.miem.yandexsmarthomeapi.domain
 
+import io.github.oshai.kotlinlogging.KotlinLogging.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
@@ -24,6 +25,10 @@ import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexApiResponse
 import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexDeviceGroupResponse
 import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexDeviceStateResponse
@@ -43,124 +48,186 @@ import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.Status
  * @property endpoint Хост для всех запросов к API.
  * @property bearerToken Токен для авторизации в API.
  */
-class YandexSmartHomeClient(
-    private val endpoint: String,
-    private val bearerToken: String
+class YandexSmartHomeClient private constructor(
+    private var endpoint: String,
+    private var bearerToken: String
 ) : YandexSmartHomeApi {
 
-    /**
-     * HTTP клиент для отправки запросов к API Яндекс Умного Дома.
-     */
-    var client = HttpClient(CIO) {
-        install(ContentNegotiation) {
-            json(Json {
-                ignoreUnknownKeys = true
-                encodeDefaults = true
-            })
+    companion object {
+        @Volatile
+        private var INSTANCE: YandexSmartHomeClient? = null
+
+        fun getInstance(endpoint: String, bearerToken: String): YandexSmartHomeClient {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: YandexSmartHomeClient(endpoint, bearerToken).also { INSTANCE = it }
+            }
         }
-        defaultRequest {
-            header(HttpHeaders.Authorization, "Bearer $bearerToken")
-            contentType(ContentType.Application.Json)
-            accept(ContentType.Application.Json)
+    }
+
+    private var client: HttpClient = createHttpClient()
+
+    private fun createHttpClient(): HttpClient {
+        return HttpClient(CIO) {
+            install(ContentNegotiation) {
+                json(Json {
+                    ignoreUnknownKeys = true
+                    encodeDefaults = true
+                })
+            }
+            defaultRequest {
+                header(HttpHeaders.Authorization, "Bearer $bearerToken")
+                contentType(ContentType.Application.Json)
+                accept(ContentType.Application.Json)
+            }
+            HttpResponseValidator {
+                validateResponse { response ->
+                    if (!response.status.isSuccess()) {
+                        val errorResponse = try {
+                            response.body<YandexErrorModelResponse>()
+                        } catch (e: Exception) {
+                            YandexErrorModelResponse(
+                                Status.ERROR.code,
+                                "",
+                                e.message ?: "Unknown error"
+                            )
+                        }
+                        logger {
+                            error(errorResponse.toString())
+                        }
+                    }
+                }
+            }
+            install(Logging) {
+                logger = Logger.DEFAULT
+                level = LogLevel.ALL
+            }
         }
-        HttpResponseValidator {
-            validateResponse { response ->
-                if (!response.status.isSuccess()) {
+    }
+
+    fun updateClient(endpoint: String, bearerToken: String) {
+        this.endpoint = endpoint
+        this.bearerToken = bearerToken
+        this.client = createHttpClient()
+    }
+
+    private suspend inline fun <reified T : YandexResponse> handleResponse(response: HttpResponse): YandexApiResponse {
+        return try {
+            when (response.status) {
+                HttpStatusCode.OK, HttpStatusCode.Created -> {
+                    val data = response.body<T>()
+                    val errors = when (data) {
+                        is YandexManageDeviceCapabilitiesStateResponse -> checkForErrorsInCapabilities(data.devices)
+                        is YandexManageGroupCapabilitiesStateResponse -> checkForErrorsInCapabilities(data.devices)
+                        else -> emptyList()
+                    }
+                    if (errors.isNotEmpty()) {
+                        YandexApiResponse.Error(errors.first())
+                    } else {
+                        when (data) {
+                            is YandexUserInfoResponse -> YandexApiResponse.SuccessUserInfo(data)
+                            is YandexDeviceStateResponse -> YandexApiResponse.SuccessDeviceState(data)
+                            is YandexDeviceGroupResponse -> YandexApiResponse.SuccessDeviceGroup(data)
+                            is YandexManageDeviceCapabilitiesStateResponse -> YandexApiResponse.SuccessManageDeviceCapabilitiesState(data)
+                            is YandexManageGroupCapabilitiesStateResponse -> YandexApiResponse.SuccessManageGroupCapabilitiesState(data)
+                            else -> YandexApiResponse.Error(YandexErrorModelResponse(data.status, data.requestId, "Unknown data type"))
+                        }
+                    }
+                }
+                else -> {
                     val errorResponse = try {
                         response.body<YandexErrorModelResponse>()
                     } catch (e: Exception) {
-                        YandexErrorModelResponse(Status.ERROR.code, "", e.message?:"Unknown error")
+                        YandexErrorModelResponse("error", "", "Exception: ${e.message}")
                     }
-                    throw ResponseException(response, errorResponse.error ?: "Unknown error")
+                    YandexApiResponse.Error(errorResponse)
                 }
             }
-        }
-        install(Logging) {
-            logger = Logger.DEFAULT
-            level = LogLevel.INFO
+        } catch (e: Exception) {
+            YandexApiResponse.Error(YandexErrorModelResponse("error", "", "Exception: ${e.message}"))
         }
     }
 
-    /**
-     * Обрабатывает HTTP ответ сервера, конвертируя его в определенный тип API ответа.
-     *
-     * @param T Ожидаемый тип данных в успешном ответе.
-     * @param response HTTP ответ от сервера.
-     * @return Объект API ответа.
-     */
-    private suspend inline fun <reified T : YandexResponse> handleResponse(response: HttpResponse): YandexApiResponse {
-        return when (response.status) {
-            HttpStatusCode.OK, HttpStatusCode.Created -> {
-                val data = response.body<T>()
-                when (data) {
-                    is YandexUserInfoResponse -> YandexApiResponse.SuccessUserInfo(data)
-                    is YandexDeviceStateResponse -> YandexApiResponse.SuccessDeviceState(data)
-                    is YandexDeviceGroupResponse -> YandexApiResponse.SuccessDeviceGroup(data)
-                    is YandexManageDeviceCapabilitiesStateResponse -> YandexApiResponse.SuccessManageDeviceCapabilitiesState(data)
-                    is YandexManageGroupCapabilitiesStateResponse -> YandexApiResponse.SuccessManageGroupCapabilitiesState(data)
-                    else -> YandexApiResponse.Error(YandexErrorModelResponse(data.status, data.requestId, "Unknown data type"))
-                }
-            }
-            else -> YandexApiResponse.Error(response.body())
-        }
-    }
-
-    /**
-     * Получает полную информацию об умном доме пользователя.
-     *
-     * @return Ответ API с информацией о умном доме.
-     */
     override suspend fun getUserInfo(): YandexApiResponse {
-        val response = client.get("$endpoint/v1.0/user/info")
-        return handleResponse<YandexUserInfoResponse>(response)
+        return try {
+            val response = client.get("$endpoint/v1.0/user/info")
+            handleResponse<YandexUserInfoResponse>(response)
+        } catch (e: Exception) {
+            logAndReturnError("getUserInfo", e)
+        }
     }
 
-    /**
-     * Получает информацию о состоянии указанного устройства.
-     *
-     * @param deviceId Идентификатор устройства.
-     * @return Ответ API с состоянием устройства.
-     */
     override suspend fun getDeviceState(deviceId: String): YandexApiResponse {
-        val response = client.get("$endpoint/v1.0/devices/$deviceId")
-        return handleResponse<YandexDeviceStateResponse>(response)
+        return try {
+            val response = client.get("$endpoint/v1.0/devices/$deviceId")
+            handleResponse<YandexDeviceStateResponse>(response)
+        } catch (e: Exception) {
+            logAndReturnError("getDeviceState", e)
+        }
     }
 
-    /**
-     * Управляет умениями указанных устройств.
-     *
-     * @param request Запрос на изменение состояния умений устройств.
-     * @return Ответ API об успешности выполнения операции.
-     */
     override suspend fun manageDeviceCapabilitiesState(request: YandexManageDeviceCapabilitiesStateRequest): YandexApiResponse {
-        val response = client.post("$endpoint/v1.0/devices/actions") {
-            setBody(request)
+        return try {
+            val response = client.post("$endpoint/v1.0/devices/actions") {
+                setBody(request)
+            }
+            handleResponse<YandexManageDeviceCapabilitiesStateResponse>(response)
+        } catch (e: Exception) {
+            logAndReturnError("manageDeviceCapabilitiesState", e)
         }
-        return handleResponse<YandexManageDeviceCapabilitiesStateResponse>(response)
     }
 
-    /**
-     * Управляет умениями устройств в указанной группе.
-     *
-     * @param groupId Идентификатор группы устройств.
-     * @param request Запрос на изменение состояния умений группы устройств.
-     * @return Ответ API об успешности выполнения операции.
-     */
-    override suspend fun manageGroupCapabilitiesState(groupId: String, request: YandexManageGroupCapabilitiesStateRequest): YandexApiResponse {
-        val response = client.post("$endpoint/v1.0/groups/${groupId}/actions") {
-            setBody(request)
+    override suspend fun manageGroupCapabilitiesState(
+        groupId: String,
+        request: YandexManageGroupCapabilitiesStateRequest
+    ): YandexApiResponse {
+        return try {
+            val response = client.post("$endpoint/v1.0/groups/$groupId/actions") {
+                setBody(request)
+            }
+            handleResponse<YandexManageGroupCapabilitiesStateResponse>(response)
+        } catch (e: Exception) {
+            logAndReturnError("manageGroupCapabilitiesState", e)
         }
-        return handleResponse<YandexManageGroupCapabilitiesStateResponse>(response)
     }
 
-    /**
-     * Получает информацию о состоянии указанной группы устройств.
-     *
-     * @param groupId Идентификатор группы устройств.
-     * @return Ответ API с состоянием группы устройств.
-     */
     override suspend fun getDeviceGroup(groupId: String): YandexApiResponse {
-        val response = client.get("$endpoint/v1.0/groups/$groupId")
-        return handleResponse<YandexDeviceGroupResponse>(response)
+        return try {
+            val response = client.get("$endpoint/v1.0/groups/$groupId")
+            handleResponse<YandexDeviceGroupResponse>(response)
+        } catch (e: Exception) {
+            logAndReturnError("getDeviceGroup", e)
+        }
+    }
+
+    /**
+     * Логирует ошибку и возвращает объект ошибки.
+     *
+     * @param method Имя метода, в котором произошла ошибка.
+     * @param e Исключение.
+     * @return Объект ошибки.
+     */
+    private fun logAndReturnError(method: String, e: Exception): YandexApiResponse.Error {
+        val error = YandexErrorModelResponse("error", "", "Exception: ${e.message}")
+        logger{ error("$method - $error") }
+        return YandexApiResponse.Error(error)
+    }
+
+    private fun checkForErrorsInCapabilities(devices: List<JsonObject>): List<YandexErrorModelResponse> {
+        val errors = mutableListOf<YandexErrorModelResponse>()
+        devices.forEach { device ->
+            device.jsonObject["capabilities"]?.jsonArray?.forEach { capability ->
+                val state = capability.jsonObject["state"]?.jsonObject
+                val actionResult = state?.get("action_result")?.jsonObject
+                if (actionResult != null) {
+                    val status = actionResult["status"]?.jsonPrimitive?.content
+                    if (status == "ERROR") {
+                        val errorCode = actionResult["error_code"]?.jsonPrimitive?.content
+                        val errorMessage = actionResult["error_message"]?.jsonPrimitive?.content
+                        errors.add(YandexErrorModelResponse("error", "", "$errorCode: $errorMessage"))
+                    }
+                }
+            }
+        }
+        return errors
     }
 }

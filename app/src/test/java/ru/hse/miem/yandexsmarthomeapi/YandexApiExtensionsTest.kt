@@ -34,7 +34,7 @@ import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.TemperatureK
 import ru.hse.miem.yandexsmarthomeapi.entity.common.property.DevicePropertyObject
 import ru.hse.miem.yandexsmarthomeapi.entity.common.toDeviceObject
 import ru.hse.miem.yandexsmarthomeapi.entity.common.toSmartHomeInfo
-import ru.hse.miem.yandexsmarthomeapi.entity.common.toUniversalSchemeJson
+import ru.hse.miem.yandexsmarthomeapi.entity.common.toJson
 import ru.hse.miem.yandexsmarthomeapi.entity.common.toYandexManageDeviceCapabilitiesStateRequest
 import ru.hse.miem.yandexsmarthomeapi.entity.common.toYandexManageGroupCapabilitiesStateRequest
 import ru.hse.miem.yandexsmarthomeapi.entity.common.toYandexUserInfoResponse
@@ -92,7 +92,7 @@ class YandexApiExtensionsTest {
         assertEquals("Мой дом", result.households[0].name)
 
         val yandexObjectResult = result.toYandexUserInfoResponse()
-        val jsonDBResult = yandexObjectResult.toUniversalSchemeJson()
+        val jsonDBResult = yandexObjectResult.toJson()
 
         val responseFromDB = json.decodeFromString<YandexUserInfoResponse>(jsonDBResult)
         val resultFromDB = responseFromDB.toSmartHomeInfo()

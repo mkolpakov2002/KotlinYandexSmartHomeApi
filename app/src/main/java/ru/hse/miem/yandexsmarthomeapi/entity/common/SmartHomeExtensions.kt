@@ -18,6 +18,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonArray
+import pl.brightinventions.codified.enums.CodifiedEnum
 import pl.brightinventions.codified.enums.codifiedEnum
 import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.Capability
 import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityObject
@@ -445,17 +446,17 @@ fun JsonObject?.toCapabilityParameterObject(typeWrapper: CapabilityTypeWrapper):
 
 fun CapabilityParameterObject.toJson(typeWrapper: CapabilityTypeWrapper): JsonObject {
     return when (typeWrapper) {
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.COLOR_SETTING.codifiedEnum()) ->
+        CapabilityTypeWrapper(CapabilityType.COLOR_SETTING.codifiedEnum()) ->
             (this as? ColorSettingCapabilityParameterObject)?.toJson() ?: error("Invalid capability parameters type")
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.ON_OFF.codifiedEnum()) ->
+        CapabilityTypeWrapper(CapabilityType.ON_OFF.codifiedEnum()) ->
             (this as? OnOffCapabilityParameterObject)?.toJson() ?: error("Invalid capability parameters type")
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.MODE.codifiedEnum()) ->
+        CapabilityTypeWrapper(CapabilityType.MODE.codifiedEnum()) ->
             (this as? ModeCapabilityParameterObject)?.toJson() ?: error("Invalid capability parameters type")
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.RANGE.codifiedEnum()) ->
+        CapabilityTypeWrapper(CapabilityType.RANGE.codifiedEnum()) ->
             (this as? RangeCapabilityParameterObject)?.toJson() ?: error("Invalid capability parameters type")
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.TOGGLE.codifiedEnum()) ->
+        CapabilityTypeWrapper(CapabilityType.TOGGLE.codifiedEnum()) ->
             (this as? ToggleCapabilityParameterObject)?.toJson() ?: error("Invalid capability parameters type")
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.VIDEO_STREAM.codifiedEnum()) ->
+        CapabilityTypeWrapper(CapabilityType.VIDEO_STREAM.codifiedEnum()) ->
             (this as? VideoStreamCapabilityParameterObject)?.toJson() ?: error("Invalid capability parameters type")
         else -> error("Unsupported capability type")
     }
@@ -546,26 +547,31 @@ fun JsonObject.toOnOffCapabilityStateObjectData(): OnOffCapabilityStateObjectDat
 }
 
 fun JsonObject.toColorSettingCapabilityStateObjectData(): ColorSettingCapabilityStateObjectData {
+    val instance = this["instance"]?.jsonPrimitive?.content?.let { ColorSettingCapabilityStateObjectInstanceWrapper(it.codifiedEnum()) }
+        ?: ColorSettingCapabilityStateObjectInstanceWrapper(ColorSettingCapabilityStateObjectInstance.TEMPERATURE_K.codifiedEnum())
     return ColorSettingCapabilityStateObjectData(
-        instance = this["instance"]?.jsonPrimitive?.content?.let { ColorSettingCapabilityStateObjectInstanceWrapper(it.codifiedEnum()) }
-            ?: ColorSettingCapabilityStateObjectInstanceWrapper(ColorSettingCapabilityStateObjectInstance.TEMPERATURE_K.codifiedEnum()),
-        value = this["value"].toColorSettingCapabilityStateObjectValue()
+        instance = instance,
+        value = this["value"].toColorSettingCapabilityStateObjectValue(instance)
     )
 }
 
-fun JsonElement?.toColorSettingCapabilityStateObjectValue(): ColorSettingCapabilityStateObjectValue {
-    return when (this) {
-        is JsonPrimitive -> ColorSettingCapabilityStateObjectValueInteger(value = this.int)
-        is JsonObject -> when (this["type"]?.jsonPrimitive?.content) {
-            "scene" -> ColorSettingCapabilityStateObjectValueObjectScene(value = SceneObjectWrapper(this["id"]?.jsonPrimitive?.content?.codifiedEnum() ?: SceneObject.ALARM.codifiedEnum()))
-            else -> ColorSettingCapabilityStateObjectValueObjectHSV(value = HSVObject(
-                h = this["h"]?.jsonPrimitive?.int ?: 0,
-                s = this["s"]?.jsonPrimitive?.int ?: 0,
-                v = this["v"]?.jsonPrimitive?.int ?: 0
+fun JsonElement?.toColorSettingCapabilityStateObjectValue(instance: ColorSettingCapabilityStateObjectInstanceWrapper): ColorSettingCapabilityStateObjectValue {
+
+    return when (instance.colorSetting.knownOrNull()) {
+        ColorSettingCapabilityStateObjectInstance.TEMPERATURE_K ->
+            ColorSettingCapabilityStateObjectValueInteger(value = this?.jsonPrimitive?.int ?: 0)
+        ColorSettingCapabilityStateObjectInstance.RGB ->
+            ColorSettingCapabilityStateObjectValueInteger(value = this?.jsonPrimitive?.int ?: 0)
+        ColorSettingCapabilityStateObjectInstance.HSV ->
+            ColorSettingCapabilityStateObjectValueObjectHSV(value = HSVObject(
+                h = this?.jsonObject?.get("h")?.jsonPrimitive?.int ?: 0,
+                s = this?.jsonObject?.get("s")?.jsonPrimitive?.int ?: 0,
+                v = this?.jsonObject?.get("v")?.jsonPrimitive?.int ?: 0
             ))
-        }
-        else -> ColorSettingCapabilityStateObjectValueInteger(0)
+        else ->
+            ColorSettingCapabilityStateObjectValueObjectScene(value = SceneObjectWrapper(this?.jsonPrimitive?.content?.codifiedEnum() ?: SceneObject.ALARM.codifiedEnum()))
     }
+
 }
 
 fun JsonObject.toRangeCapabilityStateObjectData(): RangeCapabilityStateObjectData {
@@ -596,11 +602,11 @@ fun JsonObject.toToggleCapabilityStateObjectData(): ToggleCapabilityStateObjectD
 
 fun CapabilityStateObjectData.toJson(typeWrapper: CapabilityTypeWrapper): JsonObject? {
     return when (typeWrapper) {
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.ON_OFF.codifiedEnum()) -> (this as? OnOffCapabilityStateObjectData)?.toJson()
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.COLOR_SETTING.codifiedEnum()) -> (this as? ColorSettingCapabilityStateObjectData)?.toJson()
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.RANGE.codifiedEnum()) -> (this as? RangeCapabilityStateObjectData)?.toJson()
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.MODE.codifiedEnum()) -> (this as? ModeCapabilityStateObjectData)?.toJson()
-        CapabilityTypeWrapper(ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityType.TOGGLE.codifiedEnum()) -> (this as? ToggleCapabilityStateObjectData)?.toJson()
+        CapabilityTypeWrapper(CapabilityType.ON_OFF.codifiedEnum()) -> (this as? OnOffCapabilityStateObjectData)?.toJson()
+        CapabilityTypeWrapper(CapabilityType.COLOR_SETTING.codifiedEnum()) -> (this as? ColorSettingCapabilityStateObjectData)?.toJson()
+        CapabilityTypeWrapper(CapabilityType.RANGE.codifiedEnum()) -> (this as? RangeCapabilityStateObjectData)?.toJson()
+        CapabilityTypeWrapper(CapabilityType.MODE.codifiedEnum()) -> (this as? ModeCapabilityStateObjectData)?.toJson()
+        CapabilityTypeWrapper(CapabilityType.TOGGLE.codifiedEnum()) -> (this as? ToggleCapabilityStateObjectData)?.toJson()
         else -> null
     }
 }
@@ -621,17 +627,11 @@ fun ColorSettingCapabilityStateObjectData.toJson(): JsonObject {
 
 fun ColorSettingCapabilityStateObjectValue.toJson(): JsonElement = when (this) {
     is ColorSettingCapabilityStateObjectValueInteger -> JsonPrimitive(value)
-    is ColorSettingCapabilityStateObjectValueObjectScene -> this@toJson.toJson()
+    is ColorSettingCapabilityStateObjectValueObjectScene ->  JsonPrimitive(value.scene.code())
     is ColorSettingCapabilityStateObjectValueObjectHSV -> this@toJson.toJson()
 }
 
-fun ColorSettingCapabilityStateObjectValueObjectScene.toJson(): JsonObject = buildJsonObject {
-    put("type", "scene")
-    put("id", value.scene.code())
-}
-
 fun ColorSettingCapabilityStateObjectValueObjectHSV.toJson(): JsonObject = buildJsonObject {
-    put("type", "hsv")
     value.let {
         put("h", it.h)
         put("s", it.s)

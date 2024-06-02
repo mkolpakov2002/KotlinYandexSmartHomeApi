@@ -53,7 +53,7 @@ data class DeviceCapabilityObject(
 @Serializable
 data class CapabilityObject(
     override val type: CapabilityTypeWrapper,
-    override val state: CapabilityStateObjectData?,
+    override var state: CapabilityStateObjectData?,
 ) : Capability
 
 @Serializable

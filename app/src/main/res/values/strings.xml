@@ -1,3 +1,399 @@
 <resources>
-    <string name="app_name">YandexSmartHomeApi</string>
+    <string name="app_name">Yandex Smart Home</string>
+    <!-- Device Categories -->
+    <string name="category_sensors">Sensors</string>
+    <string name="category_smart_meters">Smart Meters</string>
+    <string name="category_media_devices">Media Devices</string>
+    <string name="category_kitchen_appliances">Kitchen Appliances</string>
+    <string name="category_home_appliances">Home Appliances</string>
+    <string name="category_pet_devices">Pet Devices</string>
+    <string name="category_climate_devices">Climate Devices</string>
+    <string name="category_electrical_equipment">Electrical Equipment</string>
+    <string name="category_openable_systems">Automatic Opening/Closing Systems</string>
+    <string name="category_other_devices">Other Devices</string>
+
+    <!-- Sensors -->
+    <string name="devices_types_sensor">devices.types.sensor</string>
+    <string name="sensor">Sensor</string>
+    <string name="sensor_description">Motion sensor, humidity sensor, and other sensors. A device that transmits data from properties.</string>
+
+    <string name="devices_types_sensor_button">devices.types.sensor.button</string>
+    <string name="sensor_button">Smart Button</string>
+    <string name="sensor_button_description">A device that reports button presses.</string>
+
+    <string name="devices_types_sensor_climate">devices.types.sensor.climate</string>
+    <string name="sensor_climate">Climate Sensor</string>
+    <string name="sensor_climate_description">A device that reports temperature and humidity in a room.</string>
+
+    <string name="devices_types_sensor_gas">devices.types.sensor.gas</string>
+    <string name="sensor_gas">Gas Sensor</string>
+    <string name="sensor_gas_description">A device that reports the presence of gas in a room.</string>
+
+    <string name="devices_types_sensor_illumination">devices.types.sensor.illumination</string>
+    <string name="sensor_illumination">Illumination Sensor</string>
+    <string name="sensor_illumination_description">A device that reports the level of illumination.</string>
+
+    <string name="devices_types_sensor_motion">devices.types.sensor.motion</string>
+    <string name="sensor_motion">Motion Sensor</string>
+    <string name="sensor_motion_description">A device that reports the presence of motion.</string>
+
+    <string name="devices_types_sensor_open">devices.types.sensor.open</string>
+    <string name="sensor_open">Door Open Sensor</string>
+    <string name="sensor_open_description">A device that reports door opening/closing.</string>
+
+    <string name="devices_types_sensor_smoke">devices.types.sensor.smoke</string>
+    <string name="sensor_smoke">Smoke Sensor</string>
+    <string name="sensor_smoke_description">A device that reports the presence of smoke in a room.</string>
+
+    <string name="devices_types_sensor_vibration">devices.types.sensor.vibration</string>
+    <string name="sensor_vibration">Vibration Sensor</string>
+    <string name="sensor_vibration_description">A device that reports physical impact: vibration, fall, overturning.</string>
+
+    <string name="devices_types_sensor_water_leak">devices.types.sensor.water_leak</string>
+    <string name="sensor_water_leak">Water Leak Sensor</string>
+    <string name="sensor_water_leak_description">A device that reports water leakage.</string>
+
+    <!-- Smart Meters -->
+    <string name="devices_types_smart_meter">devices.types.smart_meter</string>
+    <string name="smart_meter">Smart Meter</string>
+    <string name="smart_meter_description">A device that measures the consumption of something (universal type for meters).</string>
+
+    <string name="devices_types_smart_meter_cold_water">devices.types.smart_meter.cold_water</string>
+    <string name="smart_meter_cold_water">Cold Water Meter</string>
+    <string name="smart_meter_cold_water_description">A device that measures cold water consumption.</string>
+
+    <string name="devices_types_smart_meter_electricity">devices.types.smart_meter.electricity</string>
+    <string name="smart_meter_electricity">Electricity Meter</string>
+    <string name="smart_meter_electricity_description">A device that measures electricity consumption.</string>
+
+    <string name="devices_types_smart_meter_gas">devices.types.smart_meter.gas</string>
+    <string name="smart_meter_gas">Gas Meter</string>
+    <string name="smart_meter_gas_description">A device that measures gas consumption.</string>
+
+    <string name="devices_types_smart_meter_heat">devices.types.smart_meter.heat</string>
+    <string name="smart_meter_heat">Heat Meter</string>
+    <string name="smart_meter_heat_description">A device that measures heat consumption.</string>
+
+    <string name="devices_types_smart_meter_hot_water">devices.types.smart_meter.hot_water</string>
+    <string name="smart_meter_hot_water">Hot Water Meter</string>
+    <string name="smart_meter_hot_water_description">A device that measures hot water consumption.</string>
+
+    <!-- Media Devices -->
+    <string name="devices_types_camera">devices.types.camera</string>
+    <string name="camera">Camera</string>
+    <string name="camera_description">Video camera, video intercom, door peephole with a camera. Devices with a built-in camera and video streaming function.</string>
+
+    <string name="devices_types_media_device">devices.types.media_device</string>
+    <string name="media_device">Media Device</string>
+    <string name="media_device_description">DVD player and other media devices. Devices that can play sound and video.</string>
+
+    <string name="devices_types_media_device_receiver">devices.types.media_device.receiver</string>
+    <string name="media_device_receiver">Satellite Receiver</string>
+    <string name="media_device_receiver_description">A device connected to a TV or display for viewing video content.</string>
+
+    <string name="devices_types_media_device_tv">devices.types.media_device.tv</string>
+    <string name="media_device_tv">Smart TV</string>
+    <string name="media_device_tv_description">Smart TV, IR remote control for TV, media box, receiver. A device for viewing video content.</string>
+
+    <string name="devices_types_media_device_tv_box">devices.types.media_device.tv_box</string>
+    <string name="media_device_tv_box">Smart TV Box</string>
+    <string name="media_device_tv_box_description">A device connected to a TV or display for viewing video content.</string>
+
+    <!-- Kitchen Appliances -->
+    <string name="devices_types_cooking">devices.types.cooking</string>
+    <string name="cooking">Kitchen Appliances</string>
+    <string name="cooking_description">Refrigerator, oven. Various smart kitchen appliances.</string>
+
+    <string name="devices_types_cooking_coffee_maker">devices.types.cooking.coffee_maker</string>
+    <string name="cooking_coffee_maker">Coffee Maker</string>
+    <string name="cooking_coffee_maker_description">A device that can make coffee.</string>
+
+    <string name="devices_types_cooking_kettle">devices.types.cooking.kettle</string>
+    <string name="cooking_kettle">Smart Kettle</string>
+    <string name="cooking_kettle_description">A device that can boil water and/or make tea.</string>
+
+    <string name="devices_types_cooking_multicooker">devices.types.cooking.multicooker</string>
+    <string name="cooking_multicooker">Multicooker</string>
+    <string name="cooking_multicooker_description">A device that performs the functions of a multicooker.</string>
+
+    <string name="devices_types_dishwasher">devices.types.dishwasher</string>
+    <string name="dishwasher">Dishwasher</string>
+    <string name="dishwasher_description">A device for washing dishes.</string>
+
+    <!-- Home Appliances -->
+    <string name="devices_types_iron">devices.types.iron</string>
+    <string name="iron">Iron</string>
+    <string name="iron_description">A device that performs the functions of an iron.</string>
+
+    <string name="devices_types_vacuum_cleaner">devices.types.vacuum_cleaner</string>
+    <string name="vacuum_cleaner">Robot Vacuum Cleaner</string>
+    <string name="vacuum_cleaner_description">A device that performs the function of a vacuum cleaner.</string>
+
+    <string name="devices_types_washing_machine">devices.types.washing_machine</string>
+    <string name="washing_machine">Washing Machine</string>
+    <string name="washing_machine_description">A device for washing clothes.</string>
+
+    <!-- Pet Devices -->
+    <string name="devices_types_pet_drinking_fountain">devices.types.pet_drinking_fountain</string>
+    <string name="pet_drinking_fountain">Drinking Fountain</string>
+    <string name="pet_drinking_fountain_description">A device that fills a pet\'s water bowl.</string>
+
+    <string name="devices_types_pet_feeder">devices.types.pet_feeder</string>
+    <string name="pet_feeder">Feeder</string>
+    <string name="pet_feeder_description">A device for feeding pets.</string>
+
+    <!-- Climate Devices -->
+    <string name="devices_types_humidifier">devices.types.humidifier</string>
+    <string name="humidifier">Humidifier</string>
+    <string name="humidifier_description">A device that regulates humidity in a room.</string>
+
+    <string name="devices_types_purifier">devices.types.purifier</string>
+    <string name="purifier">Air Purifier</string>
+    <string name="purifier_description">A device with an air purification function.</string>
+
+    <string name="devices_types_thermostat">devices.types.thermostat</string>
+    <string name="thermostat">Thermostat</string>
+    <string name="thermostat_description">Water heater, underfloor heating, heater, electric fan. Devices with temperature regulation capability.</string>
+
+    <string name="devices_types_thermostat_ac">devices.types.thermostat.ac</string>
+    <string name="thermostat_ac">Air Conditioner</string>
+    <string name="thermostat_ac_description">A device for controlling the microclimate in a room.</string>
+
+    <!-- Electrical Equipment -->
+    <string name="devices_types_light">devices.types.light</string>
+    <string name="light">Light</string>
+    <string name="light_description">Bulb, lamp, night light. A device with controllable luminous elements.</string>
+
+    <string name="devices_types_light_ceiling">devices.types.light.ceiling</string>
+    <string name="light_ceiling">Chandelier</string>
+    <string name="light_ceiling_description">A device that functions as a chandelier.</string>
+
+    <string name="devices_types_light_strip">devices.types.light.strip</string>
+    <string name="light_strip">LED Strip</string>
+    <string name="light_strip_description">A device with a controllable LED strip.</string>
+
+    <string name="devices_types_socket">devices.types.socket</string>
+    <string name="socket">Socket</string>
+    <string name="socket_description">Smart socket.</string>
+
+    <string name="devices_types_switch">devices.types.switch</string>
+    <string name="ya_switch">Switch</string>
+    <string name="switch_description">Wall light switch, toggle switch, circuit breaker, smart relay, smart button.</string>
+
+    <!-- Automatic Opening/Closing Systems -->
+    <string name="devices_types_openable">devices.types.openable</string>
+    <string name="openable">Automatic Opening/Closing Systems</string>
+    <string name="openable_description">Door, gate, window, shutters. A device that can open and/or close.</string>
+
+    <string name="devices_types_openable_curtain">devices.types.openable.curtain</string>
+    <string name="openable_curtain">Curtains</string>
+    <string name="openable_curtain_description">A device that functions as curtains.</string>
+
+    <!-- Other Devices -->
+    <string name="devices_types_other">devices.types.other</string>
+    <string name="other">Other Devices</string>
+
+    <!-- Capability names -->
+    <string name="capability_on_off">Remote device on/off control</string>
+    <string name="capability_color_setting">Color control for the device\'s glowing elements</string>
+    <string name="capability_range">Control over device parameters that have a range</string>
+    <string name="capability_mode">Switching between device operation modes</string>
+    <string name="capability_toggle">Control over device parameters that can have only one of two states</string>
+    <string name="capability_video_stream">Device video stream setup</string>
+    <string name="capability_unknown">Unknown capability</string>
+    <string name="capability_on_off_title">On/Off</string>
+    <string name="capability_color_setting_title">Color Setting</string>
+    <string name="capability_range_title">Range</string>
+    <string name="capability_mode_title">Mode</string>
+    <string name="capability_toggle_title">Toggle</string>
+    <string name="capability_video_stream_title">Video Stream</string>
+    <string name="capability_unknown_title">Unknown</string>
+
+    <string name="capability_color_setting_hue">Hue</string>
+    <string name="capability_color_setting_saturation">Saturation</string>
+    <string name="capability_color_setting_value">Value</string>
+    <string name="capability_color_setting_temperature_k">Temperature (K)</string>
+
+    <!-- Brightness -->
+    <string name="capability_brightness_title">Brightness</string>
+    <string name="capability_brightness_description">Adjust the brightness of the light elements.</string>
+
+    <!-- Channel -->
+    <string name="capability_channel_title">Channel</string>
+    <string name="capability_channel_description">Change the channel, for example, on a TV.</string>
+
+    <!-- Humidity -->
+    <string name="capability_humidity_title">Humidity</string>
+    <string name="capability_humidity_description">Adjust the humidity level.</string>
+
+    <!-- Open -->
+    <string name="capability_open_title">Open</string>
+    <string name="capability_open_description">Open something (e.g., curtains, windows).</string>
+
+    <!-- Temperature -->
+    <string name="capability_temperature_title">Temperature</string>
+    <string name="capability_temperature_description">Adjust the temperature, such as the heating temperature of a kettle, heater, or air conditioner.</string>
+
+    <!-- Volume -->
+    <string name="capability_volume_title">Volume</string>
+    <string name="capability_volume_description">Adjust the volume of the device.</string>
+
+    <!-- Property names -->
+    <string name="property_float">Display of device property values in numerical format</string>
+    <string name="property_event">Display of device property readings</string>
+    <string name="property_unknown">Unknown property</string>
+    <string name="property_float_title">Float</string>
+    <string name="property_event_title">Event</string>
+    <string name="property_unknown_title">Unknown</string>
+
+    <!-- Mode: Cleanup -->
+    <string name="capability_cleanup_mode_title">Cleanup Mode</string>
+    <string name="capability_cleanup_mode_description">Set the cleanup mode.</string>
+
+    <!-- Mode: Coffee -->
+    <string name="capability_coffee_mode_title">Coffee Mode</string>
+    <string name="capability_coffee_mode_description">Set the coffee maker mode.</string>
+
+    <!-- Mode: Dishwashing -->
+    <string name="capability_dishwashing_title">Dishwashing</string>
+    <string name="capability_dishwashing_description">Set the dishwashing mode.</string>
+
+    <!-- Mode: Fan Speed -->
+    <string name="capability_fan_speed_title">Fan Speed</string>
+    <string name="capability_fan_speed_description">Set the fan speed mode, for example, in an air conditioner, fan, or heater.</string>
+
+    <!-- Mode: Heat -->
+    <string name="capability_heat_title">Heat</string>
+    <string name="capability_heat_description">Set the heating mode.</string>
+
+    <!-- Mode: Input Source -->
+    <string name="capability_input_source_title">Input Source</string>
+    <string name="capability_input_source_description">Set the input source.</string>
+
+    <!-- Mode: Program -->
+    <string name="capability_program_title">Program</string>
+    <string name="capability_program_description">Set a program of operation.</string>
+
+    <!-- Mode: Swing -->
+    <string name="capability_swing_title">Swing</string>
+    <string name="capability_swing_description">Set the air direction in climate technology.</string>
+
+    <!-- Mode: Tea -->
+    <string name="capability_tea_mode_title">Tea Mode</string>
+    <string name="capability_tea_mode_description">Set the tea brewing mode.</string>
+
+    <!-- Mode: Thermostat -->
+    <string name="capability_thermostat_title">Thermostat</string>
+    <string name="capability_thermostat_description">Set the temperature mode of climate technology, for example, in an air conditioner.</string>
+
+    <!-- Mode: Work Speed -->
+    <string name="capability_work_speed_title">Work Speed</string>
+    <string name="capability_work_speed_description">Set the work speed.</string>
+
+    <!-- Toggle: Backlight -->
+    <string name="capability_backlight_title">Backlight</string>
+    <string name="capability_backlight_description">Toggle the backlight on or off.</string>
+
+    <!-- Toggle: Controls Locked -->
+    <string name="capability_controls_locked_title">Controls Locked</string>
+    <string name="capability_controls_locked_description">Toggle the controls lock and child mode on or off.</string>
+
+    <!-- Toggle: Ionization -->
+    <string name="capability_ionization_title">Ionization</string>
+    <string name="capability_ionization_description">Toggle ionization on or off.</string>
+
+    <!-- Toggle: Keep Warm -->
+    <string name="capability_keep_warm_title">Keep Warm</string>
+    <string name="capability_keep_warm_description">Toggle the keep warm function on or off.</string>
+
+    <!-- Toggle: Mute -->
+    <string name="capability_mute_title">Mute</string>
+    <string name="capability_mute_description">Toggle the mute function on or off.</string>
+
+    <!-- Toggle: Oscillation -->
+    <string name="capability_oscillation_title">Oscillation</string>
+    <string name="capability_oscillation_description">Toggle the oscillation function on or off, for example, in a fan.</string>
+
+    <!-- Toggle: Pause -->
+    <string name="capability_pause_title">Pause</string>
+    <string name="capability_pause_description">Toggle the pause function to temporarily stop the current activity of the device.</string>
+
+    <!-- Modes -->
+    <string name="mode_auto_title">Automatic Mode</string>
+    <string name="mode_eco_title">Economical Mode</string>
+    <string name="mode_smart_title">Smart Mode</string>
+    <string name="mode_turbo_title">Turbo Mode</string>
+    <string name="mode_cool_title">Cooling Mode</string>
+    <string name="mode_dry_title">Dry Mode</string>
+    <string name="mode_fan_only_title">Fan Only Mode</string>
+    <string name="mode_heat_title">Heating Mode</string>
+    <string name="mode_preheat_title">Preheat Mode</string>
+    <string name="mode_high_title">High Speed Mode</string>
+    <string name="mode_low_title">Low Speed Mode</string>
+    <string name="mode_medium_title">Medium Speed Mode</string>
+    <string name="mode_max_title">Maximum Mode</string>
+    <string name="mode_min_title">Minimum Mode</string>
+    <string name="mode_fast_title">Fast Mode</string>
+    <string name="mode_slow_title">Slow Mode</string>
+    <string name="mode_express_title">Express Mode</string>
+    <string name="mode_normal_title">Normal Mode</string>
+    <string name="mode_quiet_title">Quiet Mode</string>
+    <string name="mode_horizontal_title">Horizontal Mode</string>
+    <string name="mode_stationary_title">Stationary Mode</string>
+    <string name="mode_vertical_title">Vertical Mode</string>
+    <string name="mode_one_title">First Mode</string>
+    <string name="mode_two_title">Second Mode</string>
+    <string name="mode_three_title">Third Mode</string>
+    <string name="mode_four_title">Fourth Mode</string>
+    <string name="mode_five_title">Fifth Mode</string>
+    <string name="mode_six_title">Sixth Mode</string>
+    <string name="mode_seven_title">Seventh Mode</string>
+    <string name="mode_eight_title">Eighth Mode</string>
+    <string name="mode_nine_title">Ninth Mode</string>
+    <string name="mode_ten_title">Tenth Mode</string>
+    <string name="mode_americano_title">Americano</string>
+    <string name="mode_cappuccino_title">Cappuccino</string>
+    <string name="mode_double_title">Double</string>
+    <string name="mode_espresso_title">Espresso</string>
+    <string name="mode_double_espresso_title">Double Espresso</string>
+    <string name="mode_latte_title">Latte</string>
+    <string name="mode_black_tea_title">Black Tea</string>
+    <string name="mode_flower_tea_title">Flower Tea</string>
+    <string name="mode_green_tea_title">Green Tea</string>
+    <string name="mode_herbal_tea_title">Herbal Tea</string>
+    <string name="mode_oolong_tea_title">Oolong Tea</string>
+    <string name="mode_puerh_tea_title">Puerh Tea</string>
+    <string name="mode_red_tea_title">Red Tea</string>
+    <string name="mode_white_tea_title">White Tea</string>
+    <string name="mode_glass_title">Glass Cleaning</string>
+    <string name="mode_intensive_title">Intensive Mode</string>
+    <string name="mode_pre_rinse_title">Pre-rinse Mode</string>
+    <string name="mode_aspic_title">Aspic Mode</string>
+    <string name="mode_baby_food_title">Baby Food Mode</string>
+    <string name="mode_baking_title">Baking Mode</string>
+    <string name="mode_bread_title">Bread Mode</string>
+    <string name="mode_boiling_title">Boiling Mode</string>
+    <string name="mode_cereals_title">Cereals Mode</string>
+    <string name="mode_cheesecake_title">Cheesecake Mode</string>
+    <string name="mode_deep_fryer_title">Deep Fryer Mode</string>
+    <string name="mode_dessert_title">Dessert Mode</string>
+    <string name="mode_fowl_title">Fowl Mode</string>
+    <string name="mode_frying_title">Frying Mode</string>
+    <string name="mode_macaroni_title">Macaroni Mode</string>
+    <string name="mode_milk_porridge_title">Milk Porridge Mode</string>
+    <string name="mode_multicooker_title">Multicooker Mode</string>
+    <string name="mode_pasta_title">Pasta Mode</string>
+    <string name="mode_pilaf_title">Pilaf Mode</string>
+    <string name="mode_pizza_title">Pizza Mode</string>
+    <string name="mode_sauce_title">Sauce Mode</string>
+    <string name="mode_slow_cook_title">Slow Cook Mode</string>
+    <string name="mode_soup_title">Soup Mode</string>
+    <string name="mode_steam_title">Steam Mode</string>
+    <string name="mode_stewing_title">Stewing Mode</string>
+    <string name="mode_vacuum_title">Vacuum Mode</string>
+    <string name="mode_yogurt_title">Yogurt Mode</string>
+
+    <string name="capability_on">On</string>
+    <string name="capability_off">Off</string>
+
 </resources>

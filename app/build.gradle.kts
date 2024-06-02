@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("plugin.serialization") version (libs.versions.kotlin)
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -10,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "ru.hse.miem.yandexsmarthomeapi"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -39,6 +40,9 @@ android {
             it.useJUnitPlatform()
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -52,10 +56,13 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.serialization.json.v170rc)
     implementation(libs.androidx.multidex)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android.v181beta)
 
     //SLF4J
     implementation(libs.slf4j.api)
     implementation(libs.slf4j.simple)
+    implementation(libs.kotlin.logging)
 
     //Codified enums
     implementation(libs.enums)
@@ -82,4 +89,20 @@ dependencies {
     testImplementation(libs.junit.jupiter.api)
     testImplementation(libs.junit.jupiter.engine)
     testImplementation(libs.kotlinx.coroutines.test)
+
+    //Ui
+    implementation(libs.andcolorpicker)
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.draggableview)
+    implementation(libs.snackify)
+    implementation(libs.androidcolorx)
+    implementation(libs.androidx.swiperefreshlayout)
+
+
+    //Navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.dynamic.features.fragment)
 }

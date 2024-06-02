@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#FF9800</color> <!-- Оранжевый -->
+    <color name="primary_variant">#F57C00</color> <!-- Более темный оранжевый -->
+    <color name="on_primary">#FFFFFF</color> <!-- Белый -->
+
+    <color name="secondary">#03A9F4</color> <!-- Синий -->
+    <color name="secondary_variant">#0288D1</color> <!-- Более темный синий -->
+    <color name="on_secondary">#FFFFFF</color> <!-- Белый -->
+
+    <color name="background">#FFFFFF</color> <!-- Белый -->
+    <color name="on_background">#000000</color> <!-- Черный -->
+
+    <color name="surface">#FFFFFF</color> <!-- Белый -->
+    <color name="on_surface">#000000</color> <!-- Черный -->
+
+    <color name="error">#B00020</color> <!-- Красный -->
+    <color name="on_error">#FFFFFF</color> <!-- Белый -->
 </resources>
