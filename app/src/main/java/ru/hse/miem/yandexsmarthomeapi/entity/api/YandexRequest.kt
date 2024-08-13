@@ -3,6 +3,8 @@ package ru.hse.miem.yandexsmarthomeapi.entity.api
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
+import ru.hse.miem.yandexsmarthomeapi.entity.common.DeviceActionsObject
+import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityObject
 
 /**
  * Запрос на управление состояниями возможностей устройств
@@ -14,10 +16,10 @@ import kotlinx.serialization.json.JsonObject
  *   "capabilities": [CapabilityObject]
  * }
  */
-@Serializable
+@Serializable(with = YandexManageDeviceCapabilitiesStateRequestSerializer::class)
 data class YandexManageDeviceCapabilitiesStateRequest(
     @SerialName("devices")
-    val devices: List<JsonObject>
+    val devices: List<DeviceActionsObject>
 )
 
 /**
@@ -33,8 +35,8 @@ data class YandexManageDeviceCapabilitiesStateRequest(
  *   }
  * }
  */
-@Serializable
+@Serializable(with = YandexManageGroupCapabilitiesStateRequestSerializer::class)
 data class YandexManageGroupCapabilitiesStateRequest(
     @SerialName("actions")
-    val actions: List<JsonObject>
+    val actions: List<CapabilityObject>
 )

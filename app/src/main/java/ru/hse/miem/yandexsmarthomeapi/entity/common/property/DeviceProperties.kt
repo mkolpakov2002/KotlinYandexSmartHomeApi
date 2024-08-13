@@ -9,7 +9,7 @@ import pl.brightinventions.codified.enums.codifiedEnum
 import pl.brightinventions.codified.enums.serializer.codifiedEnumSerializer
 import ru.hse.miem.yandexsmarthomeapi.entity.common.MeasurementUnitWrapper
 
-@Serializable
+@Serializable(with = DevicePropertyObjectSerializer::class)
 data class DevicePropertyObject(
     override val type: PropertyTypeWrapper,
     @SerialName("reportable") val reportable: Boolean,
@@ -19,7 +19,7 @@ data class DevicePropertyObject(
     @SerialName("last_updated") override val lastUpdated: Float,
 ) : Property
 
-@Serializable
+@Serializable(with = PropertySerializer::class)
 sealed interface Property{
     @SerialName("type") val type: PropertyTypeWrapper
     @SerialName("retrievable") val retrievable: Boolean
@@ -28,7 +28,7 @@ sealed interface Property{
     @SerialName("last_updated") val lastUpdated: Float
 }
 
-@Serializable
+@Serializable(with = PropertyObjectSerializer::class)
 data class PropertyObject(
     override val type: PropertyTypeWrapper,
     override val retrievable: Boolean,
@@ -37,12 +37,12 @@ data class PropertyObject(
     @SerialName("last_updated") override val lastUpdated: Float
 ) : Property
 
-@Serializable
+@Serializable(with = PropertyParameterObjectSerializer::class)
 sealed class PropertyParameterObject {
     abstract val instance: PropertyFunctionWrapper
 }
 
-@Serializable
+@Serializable(with = FloatPropertyParameterObjectSerializer::class)
 @SerialName("float")
 data class FloatPropertyParameterObject(
     override val instance: PropertyFunctionWrapper,
@@ -64,14 +64,14 @@ enum class MeasurementUnit(override val code: String) : Codified<String> {
     object CodifiedSerializer : KSerializer<CodifiedEnum<MeasurementUnit, String>> by codifiedEnumSerializer()
 }
 
-@Serializable
+@Serializable(with = EventPropertyParameterObjectSerializer::class)
 @SerialName("event")
 data class EventPropertyParameterObject(
     override val instance: PropertyFunctionWrapper,
     val events: List<EventObject>
 ) : PropertyParameterObject()
 
-@Serializable
+@Serializable(with = PropertyValueSerializer::class)
 sealed interface PropertyValue
 
 enum class EventObjectValue(override val code: String) : Codified<String> {
@@ -96,16 +96,16 @@ enum class EventObjectValue(override val code: String) : Codified<String> {
     object CodifiedSerializer : KSerializer<CodifiedEnum<EventObjectValue, String>> by codifiedEnumSerializer()
 }
 
-@Serializable
+@Serializable(with = EventObjectValueWrapperSerializer::class)
 data class EventObjectValueWrapper(
     @Serializable(with = EventObjectValue.CodifiedSerializer::class)
     val value: CodifiedEnum<EventObjectValue, String>
 )
 
-@Serializable
+@Serializable(with = EventObjectSerializer::class)
 data class EventObject(val value: EventObjectValueWrapper): PropertyValue
 
-@Serializable
+@Serializable(with = FloatObjectValueSerializer::class)
 data class FloatObjectValue(val value: Float) : PropertyValue
 
 enum class PropertyFunction(override val code: String) : Codified<String> {
@@ -141,7 +141,7 @@ enum class PropertyFunction(override val code: String) : Codified<String> {
     object CodifiedSerializer : KSerializer<CodifiedEnum<PropertyFunction, String>> by codifiedEnumSerializer()
 }
 
-@Serializable
+@Serializable(with = PropertyFunctionWrapperSerializer::class)
 data class PropertyFunctionWrapper(
     @Serializable(with = PropertyFunction.CodifiedSerializer::class)
     val function: CodifiedEnum<PropertyFunction, String>
@@ -153,43 +153,43 @@ enum class PropertyType(override val code: String) : Codified<String> {
     object CodifiedSerializer : KSerializer<CodifiedEnum<PropertyType, String>> by codifiedEnumSerializer()
 }
 
-@Serializable
+@Serializable(with = PropertyTypeWrapperSerializer::class)
 data class PropertyTypeWrapper(
     @Serializable(with = PropertyType.CodifiedSerializer::class)
     val type: CodifiedEnum<PropertyType, String>
 )
 
-@Serializable
+@Serializable(with = PropertyStateObjectDataSerializer::class)
 sealed interface PropertyStateObjectData{
     val type: PropertyTypeWrapper
     val state: PropertyState
 }
 
-@Serializable
+@Serializable(with = PropertyStateSerializer::class)
 sealed interface PropertyState{
     val propertyFunction: PropertyFunctionWrapper
     val propertyValue: PropertyValue
 }
 
-@Serializable
+@Serializable(with = FloatPropertyStateObjectDataSerializer::class)
 data class FloatPropertyStateObjectData(
     override val type: PropertyTypeWrapper = PropertyTypeWrapper(PropertyType.FLOAT.codifiedEnum()),
     override val state: FloatPropertyState
 ) : PropertyStateObjectData
 
-@Serializable
+@Serializable(with = EventPropertyStateObjectDataSerializer::class)
 data class EventPropertyStateObjectData(
     override val type: PropertyTypeWrapper = PropertyTypeWrapper(PropertyType.EVENT.codifiedEnum()),
     override val state: EventPropertyState
 ) : PropertyStateObjectData
 
-@Serializable
+@Serializable(with = FloatPropertyStateSerializer::class)
 data class FloatPropertyState(
     override val propertyFunction: PropertyFunctionWrapper,
     override val propertyValue: FloatObjectValue
 ) : PropertyState
 
-@Serializable
+@Serializable(with = EventPropertyStateSerializer::class)
 data class EventPropertyState(
     override val propertyFunction: PropertyFunctionWrapper,
     override val propertyValue: EventObject

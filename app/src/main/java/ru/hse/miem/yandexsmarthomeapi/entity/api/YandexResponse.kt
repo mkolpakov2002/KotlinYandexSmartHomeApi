@@ -4,11 +4,14 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
+import ru.hse.miem.yandexsmarthomeapi.entity.common.*
+import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.CapabilityObject
+import ru.hse.miem.yandexsmarthomeapi.entity.common.property.PropertyObject
 
 /**
  * Базовый интерфейс для ответов от Яндекс API
  */
-@Serializable
+@Serializable(with = YandexResponseSerializer::class)
 sealed interface YandexResponse {
     val status: String
     @SerialName("request_id")
@@ -18,7 +21,7 @@ sealed interface YandexResponse {
 /**
  * Sealed класс для различных типов ответов от Яндекс API
  */
-@Serializable
+@Serializable(with = YandexApiResponseSerializer::class)
 sealed class YandexApiResponse {
     @Serializable
     data class SuccessUserInfo(val data: YandexUserInfoResponse) : YandexApiResponse()
@@ -37,7 +40,7 @@ sealed class YandexApiResponse {
 /**
  * Модель ответа с ошибкой от Яндекс API
  */
-@Serializable
+@Serializable(with = YandexErrorModelResponseSerializer::class)
 data class YandexErrorModelResponse(
     @SerialName("status") override val status: String,
     @SerialName("request_id") override val requestId: String,
@@ -48,74 +51,74 @@ data class YandexErrorModelResponse(
  * Модель ответа с информацией о пользователе от Яндекс API
  * https://yandex.ru/dev/dialogs/smart-home/doc/concepts/platform-user-info.html#format-response
  */
-@Serializable
+@Serializable(with = YandexUserInfoResponseSerializer::class)
 data class YandexUserInfoResponse(
     @SerialName("request_id") override val requestId: String,
     @SerialName("status") override val status: String,
-    @SerialName("rooms") val rooms: List<JsonObject>, // RoomObject
-    @SerialName("groups") val groups: List<JsonObject>, // GroupObject
-    @SerialName("devices") val devices: List<JsonObject>, // DeviceObject
-    @SerialName("scenarios") val scenarios: List<JsonObject>, // ScenarioObject
-    @SerialName("households") val households: List<JsonObject> // HouseholdObject
+    @SerialName("rooms") val rooms: List<RoomObject>,
+    @SerialName("groups") val groups: List<GroupObject>,
+    @SerialName("devices") val devices: List<DeviceObject>,
+    @SerialName("scenarios") val scenarios: List<ScenarioObject>,
+    @SerialName("households") val households: List<HouseholdObject>
 ): YandexResponse
 
 /**
  * Модель ответа с информацией о состоянии устройства от Яндекс API
  * https://yandex.ru/dev/dialogs/smart-home/doc/concepts/platform-device-info.html
  */
-@Serializable
+@Serializable(with = YandexDeviceStateResponseSerializer::class)
 data class YandexDeviceStateResponse(
     @SerialName("status") override val status: String,
     @SerialName("request_id") override val requestId: String,
     val id: String,
     val name: String,
     val aliases: List<String>,
-    val type: JsonPrimitive, // DeviceType
-    @SerialName("state") val state: JsonPrimitive, // DeviceState
+    val type: DeviceType,
+    @SerialName("state") val state: DeviceState,
     val groups: List<String>,
     val room: String?,
     @SerialName("external_id") val externalId: String,
     @SerialName("skill_id") val skillId: String,
-    val capabilities: List<JsonObject>, // CapabilityObject
-    val properties: List<JsonObject>, // PropertyObject
-    val quasarInfo: JsonObject? = null
+    val capabilities: List<CapabilityObject>,
+    val properties: List<PropertyObject>,
+    val quasarInfo: QuasarInfo? = null
 ) : YandexResponse
 
 /**
  * Модель ответа на запрос управления возможностями устройства от Яндекс API
  * https://yandex.ru/dev/dialogs/smart-home/doc/concepts/platform-capabilities.html#output-structure
  */
-@Serializable
+@Serializable(with = YandexManageDeviceCapabilitiesStateResponseSerializer::class)
 data class YandexManageDeviceCapabilitiesStateResponse(
     @SerialName("status") override val status: String,
     @SerialName("request_id") override val requestId: String,
-    @SerialName("devices") val devices: List<JsonObject> // DeviceActionsResultObject
+    @SerialName("devices") val devices: List<DeviceActionsResultObject>
 ) : YandexResponse
 
 /**
  * Модель ответа с информацией о группе устройств от Яндекс API
  * https://yandex.ru/dev/dialogs/smart-home/doc/concepts/platform-group-device-info.html#output-structure
  */
-@Serializable
+@Serializable(with = YandexDeviceGroupResponseSerializer::class)
 data class YandexDeviceGroupResponse(
     @SerialName("status") override val status: String,
     @SerialName("request_id") override val requestId: String,
     val id: String,
     val name: String,
     val aliases: List<String>,
-    val type: JsonObject, // DeviceType
-    val state: JsonObject, // DeviceState
-    val capabilities: List<JsonObject>, // CapabilityObject
-    val devices: List<JsonObject> // GroupDeviceInfoObject
+    val type: DeviceType,
+    val state: DeviceState,
+    val capabilities: List<CapabilityObject>,
+    val devices: List<GroupDeviceInfoObject>
 ): YandexResponse
 
 /**
  * Модель ответа на запрос управления возможностями группы устройств от Яндекс API
  * https://yandex.ru/dev/dialogs/smart-home/doc/concepts/platform-group-capabilities.html#output-structure
  */
-@Serializable
+@Serializable(with = YandexManageGroupCapabilitiesStateResponseSerializer::class)
 data class YandexManageGroupCapabilitiesStateResponse(
     @SerialName("status") override val status: String,
     @SerialName("request_id") override val requestId: String,
-    val devices: List<JsonObject> // DeviceActionsResultObject
+    val devices: List<DeviceActionsResultObject>
 ): YandexResponse

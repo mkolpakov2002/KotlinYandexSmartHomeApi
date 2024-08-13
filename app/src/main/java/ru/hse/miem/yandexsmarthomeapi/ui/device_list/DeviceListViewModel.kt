@@ -63,9 +63,8 @@ import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.VideoStreamProtoc
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import ru.hse.miem.yandexsmarthomeapi.entity.common.extensions.toDeviceActionsObject
-import ru.hse.miem.yandexsmarthomeapi.entity.common.extensions.toJson
-import ru.hse.miem.yandexsmarthomeapi.entity.common.extensions.toSmartHomeInfo
+import ru.hse.miem.yandexsmarthomeapi.entity.api.extensions.toDeviceActionsObject
+import ru.hse.miem.yandexsmarthomeapi.entity.api.extensions.toSmartHomeInfo
 
 open class DeviceListViewModel(private val client: YandexSmartHomeClient) : ViewModel() {
 
@@ -114,7 +113,7 @@ open class DeviceListViewModel(private val client: YandexSmartHomeClient) : View
 
                 _devices.value = _devices.value.map { if (it.id == deviceId) updatedDevice else it }
 
-                val request = YandexManageDeviceCapabilitiesStateRequest(listOf(updatedDevice.toDeviceActionsObject().toJson()))
+                val request = YandexManageDeviceCapabilitiesStateRequest(listOf(updatedDevice.toDeviceActionsObject()))
                 when (val response = client.manageDeviceCapabilitiesState(request)) {
                     is YandexApiResponse.SuccessManageDeviceCapabilitiesState -> {
                         // Обработка успешного ответа, если необходимо
@@ -224,7 +223,7 @@ open class DeviceListViewModel(private val client: YandexSmartHomeClient) : View
                             )
                         )
                     )
-                ).toJson()
+                )
             )
         )
     }
@@ -246,31 +245,7 @@ open class DeviceListViewModel(private val client: YandexSmartHomeClient) : View
 
     private fun extractVideoStreamData(response: YandexApiResponse.SuccessManageDeviceCapabilitiesState): VideoStreamCapabilityStateObjectResponseValue? {
         val streamResult = response.data.devices.firstOrNull()
-        return streamResult?.let { deviceJson ->
-            deviceJson["capabilities"]?.jsonArray?.firstOrNull { capabilityJson ->
-                capabilityJson.jsonObject["type"]?.jsonPrimitive?.content == CapabilityType.VIDEO_STREAM.code
-            }?.jsonObject?.let { capabilityJson ->
-                val stateJson = capabilityJson["state"]?.jsonObject
-                val instance = stateJson?.get("instance")?.jsonPrimitive?.content
-                val actionResult = stateJson?.get("action_result")?.jsonObject
-                val status = actionResult?.get("status")?.jsonPrimitive?.content
-
-                if (instance == VideoStreamCapabilityStateObjectInstance.GET_STREAM.code &&
-                    status == Status.DONE.code
-                ) {
-                    val valueJson = stateJson["value"]?.jsonObject
-                    val streamUrl = valueJson?.get("stream_url")?.jsonPrimitive?.content
-                    val protocol = valueJson?.get("protocol")?.jsonPrimitive?.content
-
-                    if (streamUrl != null && protocol != null) {
-                        VideoStreamCapabilityStateObjectResponseValue(
-                            streamUrl = streamUrl,
-                            protocol = VideoStreamProtocolWrapper(protocol.codifiedEnum())
-                        )
-                    } else null
-                } else null
-            }
-        }
+        return ((streamResult?.capabilities?.firstOrNull()?.state as? VideoStreamCapabilityStateObjectData)?.value as? VideoStreamCapabilityStateObjectResponseValue)
     }
 
     private fun updateDeviceWithStreamData(

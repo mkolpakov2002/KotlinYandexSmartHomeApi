@@ -41,6 +41,9 @@ import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexManageGroupCapabilitiesSt
 import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexManageGroupCapabilitiesStateResponse
 import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexResponse
 import ru.hse.miem.yandexsmarthomeapi.entity.api.YandexUserInfoResponse
+import ru.hse.miem.yandexsmarthomeapi.entity.common.DeviceActionsResultObject
+import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.StateResultObject
+import ru.hse.miem.yandexsmarthomeapi.entity.common.capability.Status
 
 
 /**
@@ -275,17 +278,24 @@ class YandexSmartHomeClient private constructor(
      * @param devices Список устройств для проверки.
      * @return Список ошибок, если они есть.
      */
-    private fun checkForErrorsInCapabilities(devices: List<JsonObject>): List<YandexErrorModelResponse> {
+    private fun checkForErrorsInCapabilities(devices: List<DeviceActionsResultObject>): List<YandexErrorModelResponse> {
         return devices.flatMap { device ->
-            device.jsonObject["capabilities"]?.jsonArray?.mapNotNull { capability ->
-                val state = capability.jsonObject["state"]?.jsonObject
-                val actionResult = state?.get("action_result")?.jsonObject
-                if (actionResult != null && actionResult["status"]?.jsonPrimitive?.content == "ERROR") {
-                    val errorCode = actionResult["error_code"]?.jsonPrimitive?.content
-                    val errorMessage = actionResult["error_message"]?.jsonPrimitive?.content
-                    YandexErrorModelResponse("error", "", "$errorCode: $errorMessage")
-                } else null
-            } ?: emptyList()
+            device.capabilities.mapNotNull { capability ->
+                when (val state = capability.state) {
+                    is StateResultObject -> {
+                        if (state.actionResult.status.status.knownOrNull() == Status.ERROR) {
+                            YandexErrorModelResponse(
+                                status = "ERROR",
+                                requestId = "", // Здесь нужно добавить requestId, если он доступен
+                                error = state.actionResult.errorMessage ?: "Unknown error",
+                            )
+                        } else {
+                            null
+                        }
+                    }
+                    else -> null // Если state не StateResultObject, считаем, что ошибки нет?
+                }
+            }
         }
     }
 }
