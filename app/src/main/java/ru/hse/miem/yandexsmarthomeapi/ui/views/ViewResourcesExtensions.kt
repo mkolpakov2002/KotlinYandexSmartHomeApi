@@ -42,8 +42,7 @@ fun DeviceTypeWrapper.getIconResId(): Int {
                 DeviceType.IRON -> R.drawable.iron
                 DeviceType.SENSOR -> R.drawable.sensor
                 DeviceType.SENSOR_MOTION -> R.drawable.sensor_motion
-                DeviceType.SENSOR_DOOR -> R.drawable.sensor_open
-                DeviceType.SENSOR_WINDOW -> R.drawable.sensor_open
+                DeviceType.SENSOR_OPEN -> R.drawable.sensor_open
                 DeviceType.SENSOR_WATER_LEAK -> R.drawable.sensor_water_leak
                 DeviceType.SENSOR_SMOKE -> R.drawable.sensor_smoke
                 DeviceType.SENSOR_GAS -> R.drawable.sensor_gas
@@ -51,6 +50,21 @@ fun DeviceTypeWrapper.getIconResId(): Int {
                 DeviceType.SENSOR_BUTTON -> R.drawable.sensor_button
                 DeviceType.SENSOR_ILLUMINATION -> R.drawable.sensor_illumination
                 DeviceType.OTHER -> R.drawable.other
+                DeviceType.LIGHT_CEILING -> TODO()
+                DeviceType.LIGHT_STRIP -> TODO()
+                DeviceType.OPENABLE_VALVE -> TODO()
+                DeviceType.SENSOR_CLIMATE -> TODO()
+                DeviceType.CAMERA -> TODO()
+                DeviceType.PET_DRINKING_FOUNTAIN -> TODO()
+                DeviceType.PET_FEEDER -> TODO()
+                DeviceType.SMART_METER -> TODO()
+                DeviceType.SMART_METER_COLD_WATER -> TODO()
+                DeviceType.SMART_METER_ELECTRICITY -> TODO()
+                DeviceType.SMART_METER_GAS -> TODO()
+                DeviceType.SMART_METER_HEAT -> TODO()
+                DeviceType.SMART_METER_HOT_WATER -> TODO()
+                DeviceType.VENTILATION -> TODO()
+                DeviceType.VENTILATION_FAN -> TODO()
             }
         }
         is CodifiedEnum.Unknown -> R.drawable.other
@@ -89,6 +103,7 @@ fun ModeCapabilityParameterObject.getModeCapabilityTitle(context: Context): Stri
                 ModeCapability.TEA_MODE -> context.getString(R.string.capability_tea_mode_title)
                 ModeCapability.THERMOSTAT -> context.getString(R.string.capability_thermostat_title)
                 ModeCapability.WORK_SPEED -> context.getString(R.string.capability_work_speed_title)
+                ModeCapability.VENTILATION_MODE -> TODO()
             }
         }
         is CodifiedEnum.Unknown -> this.instance.mode.code()
@@ -191,5 +206,119 @@ fun RangeCapabilityParameterObject.getRangeCapabilityTitle(context: Context): St
             }
         }
         is CodifiedEnum.Unknown -> this.instance.range.code()
+    }
+}
+
+fun DeviceTypeWrapper.getReadableName(context: Context): String {
+    return when (this.type) {
+        is CodifiedEnum.Known -> {
+            when (this.type.value) {
+                DeviceType.YANDEX_SMART_SPEAKER -> context.getString(R.string.category_media_devices)
+                DeviceType.LIGHT -> context.getString(R.string.light)
+                DeviceType.SOCKET -> context.getString(R.string.socket)
+                DeviceType.SWITCH -> context.getString(R.string.ya_switch)
+                DeviceType.THERMOSTAT -> context.getString(R.string.thermostat)
+                DeviceType.THERMOSTAT_AC -> context.getString(R.string.thermostat_ac)
+                DeviceType.MEDIA_DEVICE -> context.getString(R.string.media_device)
+                DeviceType.MEDIA_DEVICE_TV -> context.getString(R.string.media_device_tv)
+                DeviceType.MEDIA_DEVICE_TV_BOX -> context.getString(R.string.media_device_tv_box)
+                DeviceType.MEDIA_DEVICE_RECEIVER -> context.getString(R.string.media_device_receiver)
+                DeviceType.COOKING -> context.getString(R.string.cooking)
+                DeviceType.COFFEE_MAKER -> context.getString(R.string.cooking_coffee_maker)
+                DeviceType.KETTLE -> context.getString(R.string.cooking_kettle)
+                DeviceType.MULTICOOKER -> context.getString(R.string.cooking_multicooker)
+                DeviceType.OPENABLE -> context.getString(R.string.openable)
+                DeviceType.OPENABLE_CURTAIN -> context.getString(R.string.openable_curtain)
+                DeviceType.HUMIDIFIER -> context.getString(R.string.humidifier)
+                DeviceType.PURIFIER -> context.getString(R.string.purifier)
+                DeviceType.VACUUM_CLEANER -> context.getString(R.string.vacuum_cleaner)
+                DeviceType.WASHING_MACHINE -> context.getString(R.string.washing_machine)
+                DeviceType.DISHWASHER -> context.getString(R.string.dishwasher)
+                DeviceType.IRON -> context.getString(R.string.iron)
+                DeviceType.SENSOR -> context.getString(R.string.sensor)
+                DeviceType.SENSOR_MOTION -> context.getString(R.string.sensor_motion)
+                DeviceType.SENSOR_OPEN -> context.getString(R.string.sensor_open)
+                DeviceType.SENSOR_WATER_LEAK -> context.getString(R.string.sensor_water_leak)
+                DeviceType.SENSOR_SMOKE -> context.getString(R.string.sensor_smoke)
+                DeviceType.SENSOR_GAS -> context.getString(R.string.sensor_gas)
+                DeviceType.SENSOR_VIBRATION -> context.getString(R.string.sensor_vibration)
+                DeviceType.SENSOR_BUTTON -> context.getString(R.string.sensor_button)
+                DeviceType.SENSOR_ILLUMINATION -> context.getString(R.string.sensor_illumination)
+                DeviceType.OTHER -> context.getString(R.string.other)
+                DeviceType.LIGHT_CEILING -> TODO()
+                DeviceType.LIGHT_STRIP -> TODO()
+                DeviceType.OPENABLE_VALVE -> TODO()
+                DeviceType.SENSOR_CLIMATE -> TODO()
+                DeviceType.CAMERA -> TODO()
+                DeviceType.PET_DRINKING_FOUNTAIN -> TODO()
+                DeviceType.PET_FEEDER -> TODO()
+                DeviceType.SMART_METER -> TODO()
+                DeviceType.SMART_METER_COLD_WATER -> TODO()
+                DeviceType.SMART_METER_ELECTRICITY -> TODO()
+                DeviceType.SMART_METER_GAS -> TODO()
+                DeviceType.SMART_METER_HEAT -> TODO()
+                DeviceType.SMART_METER_HOT_WATER -> TODO()
+                DeviceType.VENTILATION -> TODO()
+                DeviceType.VENTILATION_FAN -> TODO()
+            }
+        }
+        is CodifiedEnum.Unknown -> context.getString(R.string.other)
+    }
+}
+
+fun DeviceTypeWrapper.getLabelResId(): Int {
+    return when (this.type) {
+        is CodifiedEnum.Known -> {
+            when (this.type.value) {
+                DeviceType.YANDEX_SMART_SPEAKER -> R.string.category_media_devices
+                DeviceType.LIGHT -> R.string.devices_types_light
+                DeviceType.SOCKET -> R.string.devices_types_socket
+                DeviceType.SWITCH -> R.string.devices_types_switch
+                DeviceType.THERMOSTAT -> R.string.devices_types_thermostat
+                DeviceType.THERMOSTAT_AC -> R.string.devices_types_thermostat_ac
+                DeviceType.MEDIA_DEVICE -> R.string.devices_types_media_device
+                DeviceType.MEDIA_DEVICE_TV -> R.string.devices_types_media_device_tv
+                DeviceType.MEDIA_DEVICE_TV_BOX -> R.string.devices_types_media_device_tv_box
+                DeviceType.MEDIA_DEVICE_RECEIVER -> R.string.devices_types_media_device_receiver
+                DeviceType.COOKING -> R.string.devices_types_cooking
+                DeviceType.COFFEE_MAKER -> R.string.devices_types_cooking_coffee_maker
+                DeviceType.KETTLE -> R.string.devices_types_cooking_kettle
+                DeviceType.MULTICOOKER -> R.string.devices_types_cooking_multicooker
+                DeviceType.OPENABLE -> R.string.devices_types_openable
+                DeviceType.OPENABLE_CURTAIN -> R.string.devices_types_openable_curtain
+                DeviceType.HUMIDIFIER -> R.string.devices_types_humidifier
+                DeviceType.PURIFIER -> R.string.devices_types_purifier
+                DeviceType.VACUUM_CLEANER -> R.string.devices_types_vacuum_cleaner
+                DeviceType.WASHING_MACHINE -> R.string.devices_types_washing_machine
+                DeviceType.DISHWASHER -> R.string.devices_types_dishwasher
+                DeviceType.IRON -> R.string.devices_types_iron
+                DeviceType.SENSOR -> R.string.devices_types_sensor
+                DeviceType.SENSOR_MOTION -> R.string.devices_types_sensor_motion
+                DeviceType.SENSOR_OPEN -> R.string.devices_types_sensor_open
+                DeviceType.SENSOR_WATER_LEAK -> R.string.devices_types_sensor_water_leak
+                DeviceType.SENSOR_SMOKE -> R.string.devices_types_sensor_smoke
+                DeviceType.SENSOR_GAS -> R.string.devices_types_sensor_gas
+                DeviceType.SENSOR_VIBRATION -> R.string.devices_types_sensor_vibration
+                DeviceType.SENSOR_BUTTON -> R.string.devices_types_sensor_button
+                DeviceType.SENSOR_ILLUMINATION -> R.string.devices_types_sensor_illumination
+                DeviceType.OTHER -> R.string.devices_types_other
+                DeviceType.LIGHT_CEILING -> TODO()
+                DeviceType.LIGHT_STRIP -> TODO()
+                DeviceType.OPENABLE_VALVE -> TODO()
+                DeviceType.SENSOR_CLIMATE -> TODO()
+                DeviceType.CAMERA -> TODO()
+                DeviceType.PET_DRINKING_FOUNTAIN -> TODO()
+                DeviceType.PET_FEEDER -> TODO()
+                DeviceType.SMART_METER -> TODO()
+                DeviceType.SMART_METER_COLD_WATER -> TODO()
+                DeviceType.SMART_METER_ELECTRICITY -> TODO()
+                DeviceType.SMART_METER_GAS -> TODO()
+                DeviceType.SMART_METER_HEAT -> TODO()
+                DeviceType.SMART_METER_HOT_WATER -> TODO()
+                DeviceType.VENTILATION -> TODO()
+                DeviceType.VENTILATION_FAN -> TODO()
+            }
+        }
+        is CodifiedEnum.Unknown -> R.string.devices_types_other
     }
 }

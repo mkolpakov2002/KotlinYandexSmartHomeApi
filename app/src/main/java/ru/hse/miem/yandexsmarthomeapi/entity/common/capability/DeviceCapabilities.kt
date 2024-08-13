@@ -3,6 +3,7 @@ package ru.hse.miem.yandexsmarthomeapi.entity.common.capability
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
 import pl.brightinventions.codified.Codified
 import pl.brightinventions.codified.enums.CodifiedEnum
 import pl.brightinventions.codified.enums.codifiedEnum
@@ -59,11 +60,14 @@ data class CapabilityObject(
 @Serializable
 data class CapabilityActionResultObject(
     @SerialName("type") val type: CapabilityTypeWrapper,
-    @SerialName("state") val state: StateResultObject
+    @SerialName("state") val state: CapabilityState
 )
 
 @Serializable
 sealed class CapabilityParameterObject
+
+@Serializable
+data class UnknownCapabilityParameterObject(val data: JsonObject) : CapabilityParameterObject()
 
 @Serializable
 data class ColorSettingCapabilityParameterObject(
@@ -113,12 +117,6 @@ data class RangeCapabilityParameterObject(
 @Serializable
 data class ToggleCapabilityParameterObject(
     val instance: ToggleCapabilityWrapper
-): CapabilityParameterObject()
-
-
-@Serializable
-data class VideoStreamCapabilityParameterObject(
-    val protocols: List<VideoStreamCapabilityParameterObjectStreamProtocolWrapper>
 ): CapabilityParameterObject()
 
 enum class ColorModel(override val code: String) : Codified<String> {
@@ -275,7 +273,8 @@ enum class ModeCapability(override val code: String) : Codified<String> {
     SWING("swing"),
     TEA_MODE("tea_mode"),
     THERMOSTAT("thermostat"),
-    WORK_SPEED("work_speed");
+    WORK_SPEED("work_speed"),
+    VENTILATION_MODE("ventilation_mode");
     object CodifiedSerializer : KSerializer<CodifiedEnum<ModeCapability, String>> by codifiedEnumSerializer()
 }
 
@@ -326,19 +325,6 @@ data class ToggleCapabilityWrapper(
     @Serializable(with = ToggleCapability.CodifiedSerializer::class)
     val toggle: CodifiedEnum<ToggleCapability, String>
 ) : CapabilityStateObjectInstance
-
-enum class VideoStreamCapabilityParameterObjectStreamProtocol(override val code: String) :
-    Codified<String> {
-    HLS("hls"),
-    RTMP("rtmp");
-    object CodifiedSerializer : KSerializer<CodifiedEnum<VideoStreamCapabilityParameterObjectStreamProtocol, String>> by codifiedEnumSerializer()
-}
-
-@Serializable
-data class VideoStreamCapabilityParameterObjectStreamProtocolWrapper(
-    @Serializable(with = VideoStreamCapabilityParameterObjectStreamProtocol.CodifiedSerializer::class)
-    val streamProtocol: CodifiedEnum<VideoStreamCapabilityParameterObjectStreamProtocol, String>
-)
 
 @Serializable
 sealed interface CapabilityState {
@@ -392,7 +378,9 @@ enum class ErrorCode(override val code: String) : Codified<String> {
     INVALID_VALUE("INVALID_VALUE"),
     NOT_SUPPORTED_IN_CURRENT_MODE("NOT_SUPPORTED_IN_CURRENT_MODE"),
     ACCOUNT_LINKING_ERROR("ACCOUNT_LINKING_ERROR"),
-    DEVICE_NOT_FOUND("DEVICE_NOT_FOUND");
+    DEVICE_NOT_FOUND("DEVICE_NOT_FOUND"),
+    COMMON_ERROR("COMMON_ERROR"),
+    UNSPECIFIED_ERROR("UNSPECIFIED_ERROR");
     object CodifiedSerializer : KSerializer<CodifiedEnum<ErrorCode, String>> by codifiedEnumSerializer()
 }
 
@@ -467,7 +455,7 @@ data class ColorSettingCapabilityStateObjectInstanceWrapper(
 sealed interface ColorSettingCapabilityStateObjectValue : CapabilityStateObjectValue
 
 @Serializable
-data class ColorSettingCapabilityStateObjectValueInteger(val value: Int) :
+data class ColorSettingCapabilityStateObjectValueRGB(val value: Int) :
     ColorSettingCapabilityStateObjectValue
 
 @Serializable
@@ -481,42 +469,6 @@ data class ColorSettingCapabilityStateObjectValueObjectHSV(val value: HSVObject)
 
 @Serializable
 data class HSVObject(val h: Int, val s: Int, val v: Int)
-
-@Serializable
-data class VideoStreamCapabilityStateObjectData(
-    override val instance: VideoStreamCapabilityStateObjectInstanceWrapper,
-    override var value: VideoStreamCapabilityStateObjectDataValue
-): CapabilityStateObjectData()
-
-@Serializable
-data class VideoStreamCapabilityStateObjectInstanceWrapper(
-    @Serializable(with = VideoStreamCapabilityStateObjectInstance.CodifiedSerializer::class)
-    val videoStream: CodifiedEnum<VideoStreamCapabilityStateObjectInstance, String>
-): CapabilityStateObjectInstance
-
-@Serializable
-enum class VideoStreamCapabilityStateObjectInstance(override val code: String) : Codified<String> {
-    GET_STREAM("get_stream");
-    object CodifiedSerializer : KSerializer<CodifiedEnum<VideoStreamCapabilityStateObjectInstance, String>> by codifiedEnumSerializer()
-}
-
-@Serializable
-data class VideoStreamCapabilityStateObjectDataValue(
-    val protocols: List<VideoStreamCapabilityParameterObjectStreamProtocolWrapper>
-) : CapabilityStateObjectValue
-
-@Serializable
-data class VideoStreamCapabilityStateObjectActionResultValue(
-    val protocol: VideoStreamCapabilityParameterObjectStreamProtocolWrapper,
-    @SerialName("stream_url") val streamUrl: String
-) : CapabilityStateObjectValue
-
-@Serializable
-data class VideoStreamCapabilityStateObjectActionResult(
-    override val instance: VideoStreamCapabilityStateObjectInstanceWrapper,
-    val value: VideoStreamCapabilityStateObjectDataValue,
-    override val actionResult: ActionResult
-): CapabilityStateObjectActionResult
 
 @Serializable
 data class ModeCapabilityStateObjectData(
@@ -560,7 +512,58 @@ data class ToggleCapabilityStateObjectDataValue(
 ) : CapabilityStateObjectValue
 
 @Serializable
+data class VideoStreamCapabilityStateObjectRequestValue(
+    val protocols: List<VideoStreamProtocolWrapper>
+) : CapabilityStateObjectValue
+
+@Serializable
+data class VideoStreamCapabilityStateObjectResponseValue(
+    val streamUrl: String,
+    val protocol: VideoStreamProtocolWrapper
+) : CapabilityStateObjectValue
+
+@Serializable
 data class ToggleCapabilityStateObjectActionResult(
     override val instance: ToggleCapabilityWrapper,
     override val actionResult: ActionResult
 ): CapabilityStateObjectActionResult
+
+@Serializable
+data class VideoStreamCapabilityParameterObject(
+    val protocols: List<VideoStreamProtocolWrapper>
+) : CapabilityParameterObject()
+
+enum class VideoStreamProtocol(override val code: String) : Codified<String> {
+    HLS("hls");
+    object CodifiedSerializer : KSerializer<CodifiedEnum<VideoStreamProtocol, String>> by codifiedEnumSerializer()
+}
+
+@Serializable
+data class VideoStreamProtocolWrapper(
+    @Serializable(with = VideoStreamProtocol.CodifiedSerializer::class)
+    val protocol: CodifiedEnum<VideoStreamProtocol, String>
+)
+
+@Serializable
+data class VideoStreamCapabilityStateObjectData(
+    override val instance: VideoStreamCapabilityStateObjectInstanceWrapper,
+    override var value: CapabilityStateObjectValue
+) : CapabilityStateObjectData()
+
+@Serializable
+enum class VideoStreamCapabilityStateObjectInstance(override val code: String) : Codified<String> {
+    GET_STREAM("get_stream");
+    object CodifiedSerializer : KSerializer<CodifiedEnum<VideoStreamCapabilityStateObjectInstance, String>> by codifiedEnumSerializer()
+}
+
+@Serializable
+data class VideoStreamCapabilityStateObjectInstanceWrapper(
+    @Serializable(with = VideoStreamCapabilityStateObjectInstance.CodifiedSerializer::class)
+    val videoStream: CodifiedEnum<VideoStreamCapabilityStateObjectInstance, String>
+) : CapabilityStateObjectInstance
+
+data class VideoStreamCapabilityStateObjectActionResult(
+    override val instance: VideoStreamCapabilityStateObjectInstanceWrapper,
+    val value: VideoStreamCapabilityStateObjectResponseValue,
+    val actionResult: ActionResult
+) : CapabilityState

@@ -66,6 +66,8 @@ sealed interface BaseDeviceObject {
 enum class DeviceType(override val code: String) : Codified<String> {
     YANDEX_SMART_SPEAKER("devices.types.smart_speaker.yandex.station.micro"),
     LIGHT("devices.types.light"),
+    LIGHT_CEILING("devices.types.light.ceiling"),
+    LIGHT_STRIP("devices.types.light.strip"),
     SOCKET("devices.types.socket"),
     SWITCH("devices.types.switch"),
     THERMOSTAT("devices.types.thermostat"),
@@ -80,6 +82,7 @@ enum class DeviceType(override val code: String) : Codified<String> {
     MULTICOOKER("devices.types.cooking.multicooker"),
     OPENABLE("devices.types.openable"),
     OPENABLE_CURTAIN("devices.types.openable.curtain"),
+    OPENABLE_VALVE("devices.types.openable.valve"),
     HUMIDIFIER("devices.types.humidifier"),
     PURIFIER("devices.types.purifier"),
     VACUUM_CLEANER("devices.types.vacuum_cleaner"),
@@ -88,15 +91,27 @@ enum class DeviceType(override val code: String) : Codified<String> {
     IRON("devices.types.iron"),
     SENSOR("devices.types.sensor"),
     SENSOR_MOTION("devices.types.sensor.motion"),
-    SENSOR_DOOR("devices.types.sensor.door"),
-    SENSOR_WINDOW("devices.types.sensor.window"),
+    SENSOR_OPEN("devices.types.sensor.open"),
     SENSOR_WATER_LEAK("devices.types.sensor.water_leak"),
     SENSOR_SMOKE("devices.types.sensor.smoke"),
     SENSOR_GAS("devices.types.sensor.gas"),
     SENSOR_VIBRATION("devices.types.sensor.vibration"),
     SENSOR_BUTTON("devices.types.sensor.button"),
     SENSOR_ILLUMINATION("devices.types.sensor.illumination"),
+    SENSOR_CLIMATE("devices.types.sensor.climate"),
+    CAMERA("devices.types.camera"),
+    PET_DRINKING_FOUNTAIN("devices.types.pet_drinking_fountain"),
+    PET_FEEDER("devices.types.pet_feeder"),
+    SMART_METER("devices.types.smart_meter"),
+    SMART_METER_COLD_WATER("devices.types.smart_meter.cold_water"),
+    SMART_METER_ELECTRICITY("devices.types.smart_meter.electricity"),
+    SMART_METER_GAS("devices.types.smart_meter.gas"),
+    SMART_METER_HEAT("devices.types.smart_meter.heat"),
+    SMART_METER_HOT_WATER("devices.types.smart_meter.hot_water"),
+    VENTILATION("devices.types.ventilation"),
+    VENTILATION_FAN("devices.types.ventilation.fan"),
     OTHER("devices.types.other");
+
     object CodifiedSerializer : KSerializer<CodifiedEnum<DeviceType, String>> by codifiedEnumSerializer()
 }
 

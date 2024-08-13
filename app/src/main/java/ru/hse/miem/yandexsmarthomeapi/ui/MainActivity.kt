@@ -1,42 +1,49 @@
 package ru.hse.miem.yandexsmarthomeapi.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import ru.hse.miem.yandexsmarthomeapi.R
-import ru.hse.miem.yandexsmarthomeapi.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material3.Surface
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.compose.rememberNavController
+import com.russhwolf.settings.Settings
+import com.russhwolf.settings.get
+import ru.hse.miem.yandexsmarthomeapi.domain.YandexSmartHomeClient
+import ru.hse.miem.yandexsmarthomeapi.ui.device_list.DeviceListViewModel
+import ru.hse.miem.yandexsmarthomeapi.ui.theme.AppTheme
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Setup Toolbar
-        setSupportActionBar(binding.toolbar)
-
-        // Setup NavController and AppBarConfiguration
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-
-        // Setup ActionBar with NavController
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // Optional: Setup bottom navigation or drawer navigation if needed
-        // NavigationUI.setupWithNavController(binding.bottomNavView, navController)
-        // NavigationUI.setupWithNavController(binding.drawerNavView, navController)
+        val token = loadToken()
+        val client = YandexSmartHomeClient.getInstance(
+            "https://api.iot.yandex.net",
+            token ?: "default_bearer_token"
+        )
+        setContent {
+            val navController = rememberNavController()
+            AppTheme {
+                Surface(tonalElevation = 5.dp) {
+                    AppNavHost(navController, client)
+                }
+            }
+        }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+    private fun loadToken(): String? {
+        val settings: Settings = Settings()
+        return settings["yandex_token"]
+    }
+}
+
+class DeviceListViewModelFactory(private val client: YandexSmartHomeClient) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(DeviceListViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return DeviceListViewModel(client) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

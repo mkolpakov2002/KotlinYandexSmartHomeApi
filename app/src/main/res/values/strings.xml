@@ -12,6 +12,8 @@
     <string name="category_openable_systems">Automatic Opening/Closing Systems</string>
     <string name="category_other_devices">Other Devices</string>
 
+    <string name="device_type_label">Type: %1$s</string>
+
     <!-- Sensors -->
     <string name="devices_types_sensor">devices.types.sensor</string>
     <string name="sensor">Sensor</string>

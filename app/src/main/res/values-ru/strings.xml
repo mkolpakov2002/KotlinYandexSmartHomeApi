@@ -13,6 +13,8 @@
     <string name="category_openable_systems">Автоматические системы управления открытием/закрытием</string>
     <string name="category_other_devices">Остальные устройства</string>
 
+    <string name="device_type_label">Тип: %1$s</string>
+
     <!-- Датчики -->
     <string name="devices_types_sensor">devices.types.sensor</string>
     <string name="sensor">Датчик</string>
