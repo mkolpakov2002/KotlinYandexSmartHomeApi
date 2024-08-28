@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "ru.hse.miem.yandexsmarthomeapi"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ru.hse.miem.yandexsmarthomeapi"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -64,9 +64,7 @@ dependencies {
 
     // Kotlin
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.kotlinx.serialization.json.v170rc)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.coroutines.android.v181beta)
     implementation(libs.kotlinx.coroutines.android)
 
     // Logging
@@ -109,8 +107,8 @@ dependencies {
 
     // Compose
     val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
+    implementation("androidx.compose:compose-bom:2024.08.00")
+    androidTestImplementation("androidx.compose:compose-bom:2024.08.00")
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)
@@ -142,4 +140,13 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.asset.delivery)
+    implementation(libs.asset.delivery.ktx)
+    implementation(libs.feature.delivery)
+    implementation(libs.feature.delivery.ktx)
+    implementation(libs.review)
+    implementation(libs.review.ktx)
+    implementation(libs.app.update)
+    implementation(libs.app.update.ktx)
 }

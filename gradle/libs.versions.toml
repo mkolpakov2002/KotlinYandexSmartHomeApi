@@ -1,16 +1,22 @@
 [versions]
 activityCompose = "1.9.1"
-agp = "8.5.2"
+agp = "8.4.2"
 andcolorpicker = "0.6.2"
 androidcolorx = "0.2.0"
-animationGraphicsAndroid = "1.7.0-beta07"
-authsdk = "3.1.0"
-composeMultiplatformMediaPlayer = "1.0.12"
-desugar_jdk_libs = "2.0.4"
+animationGraphicsAndroid = "1.7.0-rc01"
+appUpdate = "2.1.0"
+appUpdateKtx = "2.1.0"
+assetDelivery = "2.2.2"
+assetDeliveryKtx = "2.2.2"
+authsdk = "3.1.1"
+composeMultiplatformMediaPlayer = "1.0.19"
+desugar_jdk_libs = "2.1.0"
 draggableview = "1.0.1"
 enums = "1.9.24.1"
-junitJupiterApi = "5.10.3"
-kotlin = "2.0.0"
+featureDelivery = "2.1.0"
+featureDeliveryKtx = "2.1.0"
+junitJupiterApi = "5.11.0"
+kotlin = "2.0.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -21,19 +27,20 @@ kotlinxCoroutinesAndroid = "1.8.1"
 kotlinxCoroutinesAndroidVersion = "1.8.1"
 kotlinxCoroutinesTest = "1.8.1"
 kotlinxSerializationJson = "1.7.1"
-kotlinxSerializationJsonVersion = "1.7.1"
 ktorClientCore = "3.0.0-beta-2"
 lifecycleViewmodelCompose = "2.8.4"
 material = "1.12.0"
-media3Exoplayer = "1.4.0"
-media3ExoplayerHls = "1.4.0"
-media3ExoplayerSmoothstreaming = "1.4.0"
-media3Session = "1.4.0"
+media3Exoplayer = "1.4.1"
+media3ExoplayerHls = "1.4.1"
+media3ExoplayerSmoothstreaming = "1.4.1"
+media3Session = "1.4.1"
 mockk = "1.13.12"
 multidex = "2.0.1"
 multiplatformSettings = "1.1.1"
 navigationFragmentKtx = "2.7.7"
-slf4jSimple = "2.0.13"
+review = "2.0.1"
+reviewKtx = "2.0.1"
+slf4jSimple = "2.0.16"
 snackify = "0.1.2"
 swiperefreshlayout = "1.1.0"
 navigationCompose = "2.7.7"
@@ -65,12 +72,18 @@ androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdateKtx" }
+app-update = { module = "com.google.android.play:app-update", version.ref = "appUpdate" }
+asset-delivery = { module = "com.google.android.play:asset-delivery", version.ref = "assetDelivery" }
+asset-delivery-ktx = { module = "com.google.android.play:asset-delivery-ktx", version.ref = "assetDeliveryKtx" }
 authsdk = { module = "com.yandex.android:authsdk", version.ref = "authsdk" }
 compose-multiplatform-media-player = { module = "network.chaintech:compose-multiplatform-media-player", version.ref = "composeMultiplatformMediaPlayer" }
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
 draggableview = { module = "com.github.hyuwah:DraggableView", version.ref = "draggableview" }
 enums = { module = "dev.bright.codified:enums", version.ref = "enums" }
 enums-serializer = { module = "dev.bright.codified:enums-serializer", version.ref = "enums" }
+feature-delivery = { module = "com.google.android.play:feature-delivery", version.ref = "featureDelivery" }
+feature-delivery-ktx = { module = "com.google.android.play:feature-delivery-ktx", version.ref = "featureDeliveryKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -79,11 +92,9 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.re
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitJupiterApi" }
 kotlin-logging = { module = "io.github.oshai:kotlin-logging", version.ref = "kotlinLogging" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
-kotlinx-coroutines-android-v181beta = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroidVersion" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesAndroidVersion" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
-kotlinx-serialization-json-v170rc = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientCore" }
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktorClientCore" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCore" }
@@ -100,6 +111,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
 multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
+review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "reviewKtx" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4jSimple" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 snackify = { module = "com.github.Musfick:Snackify", version.ref = "snackify" }
