@@ -13,44 +13,44 @@ class SerializationTests {
 
     @Test
     fun testSkillsDescriptionSocketSerialization() {
-        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.SKILLS_DESCRIPTION_SOCKET)
+        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.CAPABILITIES_DESCRIPTION_SOCKET)
         val serialized = json.encodeToString(deserialized)
-        assertEquals(json.parseToJsonElement(TestConstants.SKILLS_DESCRIPTION_SOCKET), json.parseToJsonElement(serialized))
+        assertEquals(json.parseToJsonElement(TestConstants.CAPABILITIES_DESCRIPTION_SOCKET), json.parseToJsonElement(serialized))
     }
 
     @Test
     fun testSkillsDescriptionLampSerialization() {
-        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.SKILLS_DESCRIPTION_LAMP)
+        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.CAPABILITIES_DESCRIPTION_LAMP)
         val serialized = json.encodeToString(deserialized)
-        assertEquals(json.parseToJsonElement(TestConstants.SKILLS_DESCRIPTION_LAMP), json.parseToJsonElement(serialized))
+        assertEquals(json.parseToJsonElement(TestConstants.CAPABILITIES_DESCRIPTION_LAMP), json.parseToJsonElement(serialized))
     }
 
     @Test
     fun testSkillsDescriptionCameraSerialization() {
-        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.SKILLS_DESCRIPTION_CAMERA)
+        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.CAPABILITIES_DESCRIPTION_CAMERA)
         val serialized = json.encodeToString(deserialized)
-        assertEquals(json.parseToJsonElement(TestConstants.SKILLS_DESCRIPTION_CAMERA), json.parseToJsonElement(serialized))
+        assertEquals(json.parseToJsonElement(TestConstants.CAPABILITIES_DESCRIPTION_CAMERA), json.parseToJsonElement(serialized))
     }
 
     @Test
     fun testSkillsDescriptionACSerialization() {
-        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.SKILLS_DESCRIPTION_AC)
+        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.CAPABILITIES_DESCRIPTION_AC)
         val serialized = json.encodeToString(deserialized)
-        assertEquals(json.parseToJsonElement(TestConstants.SKILLS_DESCRIPTION_AC), json.parseToJsonElement(serialized))
+        assertEquals(json.parseToJsonElement(TestConstants.CAPABILITIES_DESCRIPTION_AC), json.parseToJsonElement(serialized))
     }
 
     @Test
     fun testSkillsDescriptionLampsSerialization() {
-        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.SKILLS_DESCRIPTION_LAMPS)
+        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.CAPABILITIES_DESCRIPTION_LAMPS)
         val serialized = json.encodeToString(deserialized)
-        assertEquals(json.parseToJsonElement(TestConstants.SKILLS_DESCRIPTION_LAMPS), json.parseToJsonElement(serialized))
+        assertEquals(json.parseToJsonElement(TestConstants.CAPABILITIES_DESCRIPTION_LAMPS), json.parseToJsonElement(serialized))
     }
 
     @Test
     fun testSkillsDescriptionHumidifierSerialization() {
-        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.SKILLS_DESCRIPTION_HUMIDIFIER)
+        val deserialized = json.decodeFromString<YandexUserInfoResponse>(TestConstants.CAPABILITIES_DESCRIPTION_HUMIDIFIER)
         val serialized = json.encodeToString(deserialized)
-        assertEquals(json.parseToJsonElement(TestConstants.SKILLS_DESCRIPTION_HUMIDIFIER), json.parseToJsonElement(serialized))
+        assertEquals(json.parseToJsonElement(TestConstants.CAPABILITIES_DESCRIPTION_HUMIDIFIER), json.parseToJsonElement(serialized))
     }
 
     @Test

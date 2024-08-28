@@ -2,7 +2,7 @@ package ru.hse.miem.yandexsmarthomeapi
 
 object TestConstants {
 
-    const val SKILLS_DESCRIPTION_SOCKET = """
+    const val CAPABILITIES_DESCRIPTION_SOCKET = """
     {
         "request_id": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
         "payload": {
@@ -39,7 +39,7 @@ object TestConstants {
     }
     """
 
-    const val SKILLS_DESCRIPTION_LAMP = """
+    const val CAPABILITIES_DESCRIPTION_LAMP = """
     {
         "request_id": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
         "payload": {
@@ -87,7 +87,7 @@ object TestConstants {
     }
     """
 
-    const val SKILLS_DESCRIPTION_CAMERA = """
+    const val CAPABILITIES_DESCRIPTION_CAMERA = """
     {
         "request_id": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
         "payload": {
@@ -121,7 +121,7 @@ object TestConstants {
     }
     """
 
-    const val SKILLS_DESCRIPTION_AC = """
+    const val CAPABILITIES_DESCRIPTION_AC = """
     {
         "request_id": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
         "payload": {
@@ -171,7 +171,7 @@ object TestConstants {
     }
     """
 
-    const val SKILLS_DESCRIPTION_LAMPS = """
+    const val CAPABILITIES_DESCRIPTION_LAMPS = """
     {
         "request_id": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
         "payload": {
@@ -241,7 +241,7 @@ object TestConstants {
     }
     """
 
-    const val SKILLS_DESCRIPTION_HUMIDIFIER = """
+    const val CAPABILITIES_DESCRIPTION_HUMIDIFIER = """
     {
         "request_id": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
         "payload": {
